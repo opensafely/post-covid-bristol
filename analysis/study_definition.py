@@ -12,6 +12,17 @@ def generate_ethnicity_dictionary(n_groups:int) -> dict:
             """
     return eth_dict
 
+def generate_deprivation_ntile_dictionary(ntiles:int) -> dict:
+    dep_dict={"0": "DEFAULT"}
+    for n in range(1,ntiles+1):
+        l = f"index_of_multiple_deprivation >={1 if n==1 else f'32844*{n-1}/{ntiles}'}"
+        r = f" AND index_of_multiple_deprivation < 32844*{n}/{ntiles}"
+
+        dep_dict[str(n)] = l if n==ntiles else l+r
+
+    return dep_dict
+
+
 
 study = StudyDefinition(
     #placeholder index date
@@ -173,5 +184,33 @@ study = StudyDefinition(
                 }
             }
         }
-    )
+    ),
+
+    cov_deprivation=patients.categorised_as(
+        generate_deprivation_ntile_dictionary(10),
+        index_of_multiple_deprivation=patients.address_as_of(
+            "index_date",
+            returning="index_of_multiple_deprivation",
+            round_to_nearest=100,
+        ),
+        return_expectations={
+            "rate": "universal",
+            "category": {
+                "ratios": {
+                    "0" : 0.01,
+                    "1" : 0.1,
+                    "2" : 0.1,
+                    "3" : 0.1,
+                    "4" : 0.1,
+                    "5" : 0.1,
+                    "6" : 0.1,
+                    "7" : 0.1,
+                    "8" : 0.1,
+                    "9" : 0.1,
+                    "10": 0.09,
+                }
+            },
+        },
+    ),
+
 )
