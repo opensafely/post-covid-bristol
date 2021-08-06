@@ -1,38 +1,6 @@
 from cohortextractor import StudyDefinition, patients
 import codelists
-
-
-def generate_ethnicity_dictionary(n_groups:int) -> dict:
-    eth_dict={"0":"DEFAULT"}
-    for n in range(1,n_groups+1):
-        eth_dict[str(n)] = f""" 
-            (cov_ethnicity_sus="{n}" AND cov_ethnicity_gp_opensafely="" AND cov_ethnicity_gp_primis="") OR
-            (cov_ethnicity_gp_opensafely="{n}" AND cov_ethnicity_gp_opensafely_date >= cov_ethnicity_gp_primis_date ) OR
-            (cov_ethnicity_gp_primis="{n}" AND cov_ethnicity_gp_primis_date > cov_ethnicity_gp_opensafely_date)            
-            """
-    return eth_dict
-
-def generate_deprivation_ntile_dictionary(ntiles:int) -> dict:
-    dep_dict={"0": "DEFAULT"}
-    for n in range(1,ntiles+1):
-        l = f"index_of_multiple_deprivation >={1 if n==1 else f'32844*{n-1}/{ntiles}'}"
-        r = f" AND index_of_multiple_deprivation < 32844*{n}/{ntiles}"
-
-        dep_dict[str(n)] = l if n==ntiles else l+r
-
-    return dep_dict
-
-def generate_universal_expectations(n_categories:int) -> dict:
-    equal_ratio = round(1/n_categories,2)
-    ratios = {str(n):equal_ratio for n in range(1,n_categories)}
-    ratios["0"]= 0.01
-    ratios[str(n_categories)] = 1-sum(ratios.values())
-
-    exp_dict = {"rate": "universal",
-                "category": {"ratios":ratios}
-                }
-
-    return exp_dict
+import study_def_helper_functions as helpers
 
 study = StudyDefinition(
     #placeholder index date
@@ -95,7 +63,7 @@ study = StudyDefinition(
         }
     ),
 
-    cov_ethnicity=patients.categorised_as(generate_ethnicity_dictionary(16),
+    cov_ethnicity=patients.categorised_as(helpers.generate_ethnicity_dictionary(16),
 
         cov_ethnicity_sus=patients.with_ethnicity_from_sus(
             returning="group_16",
@@ -129,7 +97,7 @@ study = StudyDefinition(
             returning="category",
             find_last_match_in_period=True
         ),
-        return_expectations=generate_universal_expectations(16)
+        return_expectations=helpers.generate_universal_expectations(16)
     ),
 
     cov_smoking_status_clear = patients.with_these_clinical_events(
@@ -165,13 +133,13 @@ study = StudyDefinition(
     ),
 
     cov_deprivation=patients.categorised_as(
-        generate_deprivation_ntile_dictionary(10),
+        helpers.generate_deprivation_ntile_dictionary(10),
         index_of_multiple_deprivation=patients.address_as_of(
             "index_date",
             returning="index_of_multiple_deprivation",
             round_to_nearest=100,
         ),
-        return_expectations=generate_universal_expectations(10)
+        return_expectations=helpers.generate_universal_expectations(10)
     ),
     
     cov_region=patients.registered_practice_as_of(
