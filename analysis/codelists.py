@@ -14,3 +14,17 @@ primis_covid19_vacc_update_ethnicity = codelist_from_csv(
     column="code",
     category_column="grouping_16_id"
 )
+
+smoking_clear = codelist_from_csv(
+    "codelists/opensafely-smoking-clear.csv",
+    system="ctv3",
+    column="CTV3Code",
+    category_column="Category"
+)
+
+smoking_unclear = codelist_from_csv(
+    "codelists/opensafely-smoking-unclear.csv",
+    system="ctv3",
+    column="CTV3Code",
+    category_column="Category"
+)

@@ -141,5 +141,37 @@ study = StudyDefinition(
                 }
             },
         },
+    ),
+
+    cov_smoking_status_clear = patients.with_these_clinical_events(
+        codelists.smoking_clear,
+        on_or_before="index_date",
+        find_last_match_in_period=True,
+        return_expectations={
+            "incidence":0.7,
+            "category":{
+                "ratios": {
+                    "S":0.1,
+                    "N":0.7,
+                    "E":0.2
+                }
+            }
+        }
+    ),
+
+    cov_smoking_status_unclear = patients.with_these_clinical_events(
+        codelists.smoking_unclear,
+        on_or_before="index_date",
+        find_last_match_in_period=True,
+        return_expectations={
+            "incidence":0.7,
+            "category":{
+                "ratios": {
+                    "S":0.1,
+                    "N":0.7,
+                    "E":0.2
+                }
+            }
+        }
     )
 )
