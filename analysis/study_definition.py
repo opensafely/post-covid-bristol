@@ -22,7 +22,17 @@ def generate_deprivation_ntile_dictionary(ntiles:int) -> dict:
 
     return dep_dict
 
+def generate_universal_expectations(n_categories:int) -> dict:
+    equal_ratio = round(1/n_categories,2)
+    ratios = {str(n):equal_ratio for n in range(1,n_categories)}
+    ratios["0"]= 0.01
+    ratios[str(n_categories)] = 1-sum(ratios.values())
 
+    exp_dict = {"rate": "universal",
+                "category": {"ratios":ratios}
+                }
+
+    return exp_dict
 
 study = StudyDefinition(
     #placeholder index date
@@ -89,69 +99,37 @@ study = StudyDefinition(
 
         cov_ethnicity_sus=patients.with_ethnicity_from_sus(
             returning="group_16",
-            use_most_frequent_code=True,
-            return_expectations={
-                "category": {"ratios": {"1": 0.2, "2": 0.2, "3": 0.2, "4": 0.2, "5": 0.2}},
-                "incidence": 0.75,
-            }
+            use_most_frequent_code=True
         ),
 
         cov_ethnicity_gp_opensafely=patients.with_these_clinical_events(
             codelists.opensafely_ethnicity_codes_16,
             on_or_before="index_date",
             returning="category",
-            find_last_match_in_period=True,
-            return_expectations={
-                "category": {"ratios": {"1": 0.2, "2": 0.2, "3": 0.2, "4": 0.2, "5": 0.2}},
-                "incidence": 0.75,
-            }
+            find_last_match_in_period=True
         ),
         
         cov_ethnicity_gp_primis=patients.with_these_clinical_events(
             codelists.primis_covid19_vacc_update_ethnicity,
             on_or_before="index_date",
             returning="category",
-            find_last_match_in_period=True,
-            return_expectations={
-                "category": {"ratios": {"1": 0.2, "2": 0.2, "3": 0.2, "4": 0.2, "5": 0.2}},
-                "incidence": 0.75,
-            }
+            find_last_match_in_period=True
         ),
 
         cov_ethnicity_gp_opensafely_date=patients.with_these_clinical_events(
             codelists.opensafely_ethnicity_codes_16,
             on_or_before="index_date",
             returning="category",
-            find_last_match_in_period=True,
-            return_expectations={
-                "category": {"ratios": {"1": 0.2, "2": 0.2, "3": 0.2, "4": 0.2, "5": 0.2}},
-                "incidence": 0.75,
-            }
+            find_last_match_in_period=True
         ),
         
         cov_ethnicity_gp_primis_date=patients.with_these_clinical_events(
             codelists.primis_covid19_vacc_update_ethnicity,
             on_or_before="index_date",
             returning="category",
-            find_last_match_in_period=True,
-            return_expectations={
-                "category": {"ratios": {"1": 0.2, "2": 0.2, "3": 0.2, "4": 0.2, "5": 0.2}},
-                "incidence": 0.75,
-            }
+            find_last_match_in_period=True
         ),
-        return_expectations={
-            "rate": "universal",
-            "category": {
-                "ratios": {
-                    "0": 0.01,
-                    "1": 0.20,
-                    "2": 0.20,
-                    "3": 0.20,
-                    "4": 0.20,
-                    "5": 0.19
-                }
-            },
-        },
+        return_expectations=generate_universal_expectations(16)
     ),
 
     cov_smoking_status_clear = patients.with_these_clinical_events(
