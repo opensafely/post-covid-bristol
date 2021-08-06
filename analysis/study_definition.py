@@ -171,24 +171,7 @@ study = StudyDefinition(
             returning="index_of_multiple_deprivation",
             round_to_nearest=100,
         ),
-        return_expectations={
-            "rate": "universal",
-            "category": {
-                "ratios": {
-                    "0" : 0.01,
-                    "1" : 0.1,
-                    "2" : 0.1,
-                    "3" : 0.1,
-                    "4" : 0.1,
-                    "5" : 0.1,
-                    "6" : 0.1,
-                    "7" : 0.1,
-                    "8" : 0.1,
-                    "9" : 0.1,
-                    "10": 0.09,
-                }
-            },
-        },
+        return_expectations=generate_universal_expectations(10)
     ),
     
     cov_region=patients.registered_practice_as_of(
