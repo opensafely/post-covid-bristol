@@ -4,8 +4,12 @@ import random
 
 
 def get_variable_definition(codelist):
+    """
+    Derives the variable definition depending on the codelist.system
+    The variables returned are simple binary variables before the index date.
+    """
     if codelist.system == "ctv3":
-        return patients.with_these_clinical_events(codelist, on_or_after="index_date")
+        return patients.with_these_clinical_events(codelist, on_or_before="index_date")
     if codelist.system == "icd10":
         return patients.admitted_to_hospital(
             with_these_diagnoses=codelist, on_or_before="index_date"
@@ -27,10 +31,17 @@ def retrieve_name(var):
             if var_val is var
         ]
         if len(names) > 0:
+            ## Adds a random number to the name, otherwise there may be duplicate
+            ## variable names
             return names[0] + str(random.randint(1, 1000))
 
 
 def get_codelist_variable(codelists):
+    """
+    Takes a list of codelist and returns either:
+    - a single variable if len(codelists) == 1
+    - a combined variable (using OR)
+    """
     if len(codelists) > 1:
         string_list = [retrieve_name(v) for v in codelists]
         logic = " OR ".join(string_list)
