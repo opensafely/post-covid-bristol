@@ -1,4 +1,4 @@
-from cohortextractor import StudyDefinition, patients
+from cohortextractor import StudyDefinition, patients, filter_codes_by_category
 import codelists
 import study_def_helper_functions as helpers
 
@@ -106,13 +106,13 @@ study = StudyDefinition(
             "category": {"ratios": {"S": 0.6, "E": 0.1, "N": 0.2, "M": 0.1}}
         },
         most_recent_smoking_code=patients.with_these_clinical_events(
-            smoking_clear,
+            codelists.smoking_clear,
             find_last_match_in_period=True,
             on_or_before="index_date",
             returning="category",
         ),
         ever_smoked=patients.with_these_clinical_events(
-            filter_codes_by_category(smoking_clear, include=["S", "E"]),
+            filter_codes_by_category(codelists.smoking_clear, include=["S", "E"]),
             on_or_before="index_date",
         ),
     ),
