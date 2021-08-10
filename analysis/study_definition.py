@@ -91,36 +91,30 @@ study = StudyDefinition(
         return_expectations=helpers.generate_universal_expectations(16)
     ),
 
-    cov_smoking_status_clear = patients.with_these_clinical_events(
-        codelists.smoking_clear,
-        on_or_before="index_date",
-        find_last_match_in_period=True,
+    cov_smoking_status = patients.categorised_as(
+        {
+            "S": "most_recent_smoking_code = 'S'",
+            "E": """
+                 most_recent_smoking_code = 'E' OR (
+                   most_recent_smoking_code = 'N' AND ever_smoked
+                 )
+            """,
+            "N": "most_recent_smoking_code = 'N' AND NOT ever_smoked",
+            "M": "DEFAULT",
+        },
         return_expectations={
-            "incidence":0.7,
-            "category":{
-                "ratios": {
-                    "S":0.1,
-                    "N":0.7,
-                    "E":0.2
-                }
-            }
-        }
-    ),
-
-    cov_smoking_status_unclear = patients.with_these_clinical_events(
-        codelists.smoking_unclear,
-        on_or_before="index_date",
-        find_last_match_in_period=True,
-        return_expectations={
-            "incidence":0.7,
-            "category":{
-                "ratios": {
-                    "S":0.1,
-                    "N":0.7,
-                    "E":0.2
-                }
-            }
-        }
+            "category": {"ratios": {"S": 0.6, "E": 0.1, "N": 0.2, "M": 0.1}}
+        },
+        most_recent_smoking_code=patients.with_these_clinical_events(
+            smoking_clear,
+            find_last_match_in_period=True,
+            on_or_before="index_date",
+            returning="category",
+        ),
+        ever_smoked=patients.with_these_clinical_events(
+            filter_codes_by_category(smoking_clear, include=["S", "E"]),
+            on_or_before="index_date",
+        ),
     ),
 
     cov_deprivation=patients.categorised_as(
