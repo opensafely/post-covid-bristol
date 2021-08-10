@@ -33,7 +33,7 @@ def retrieve_name(var):
         if len(names) > 0:
             ## Adds a random number to the name, otherwise there may be duplicate
             ## variable names
-            return names[0] + str(random.randint(1, 1000))
+            return names[0] + str(random.randint(1, 10000))
 
 
 def get_codelist_variable(codelists):
