@@ -12,21 +12,12 @@ study = StudyDefinition(
         "incidence": 0.5,
     },
 
-    population=patients.all(),
+    population=patients.registered_with_one_practice_between("2019-02-01", "2020-02-01"),
 
     ###
     # Used to support combined death_date variable. 
     # Ideally would be contained within minimum_of()
     primary_care_death_date=patients.with_death_recorded_in_primary_care(
-        on_or_after="index_date",
-        returning="date_of_death",
-        date_format="YYYY-MM-DD",
-        return_expectations={
-            "date": {"earliest" : "index_date"},
-            "rate" : "exponential_increase"
-        }
-    ),
-    cpns_death_date=patients.with_death_recorded_in_cpns(
         on_or_after="index_date",
         returning="date_of_death",
         date_format="YYYY-MM-DD",
@@ -46,7 +37,7 @@ study = StudyDefinition(
     ),
     ###
 
-    death_date=patients.minimum_of("primary_care_death_date","cpns_death_date","ons_died_from_any_cause_date"),
+    death_date=patients.minimum_of("primary_care_death_date","ons_died_from_any_cause_date"),
 
     cov_sex=patients.sex(
     return_expectations={
