@@ -11,6 +11,7 @@ from variable_loop import get_codelist_variable
 placeholder_ctv3 = codelist(["codes"], system="ctv3")
 placeholder_icd10 = codelist(["codes"], system="icd10")
 placeholder_dmd = codelist(["codes"], system="snomed")
+placeholder_opcs4 = codelist(["codes"], system="opcs4")
 
 variables = {
     "cov_ever_ami": [placeholder_ctv3, placeholder_icd10],
@@ -23,6 +24,8 @@ variables = {
     "cov_ever_liver_disease": [placeholder_ctv3, placeholder_icd10],
     "cov_ever_ckd": [placeholder_ctv3, placeholder_icd10],
     "cov_ever_cancer": [placeholder_ctv3, placeholder_icd10],
+    "cov_surgery_lastyr": [placeholder_opcs4],
+    "cov_ever_hypertension": [placeholder_ctv3, placeholder_dmd],
     "cov_ever_diabetes": [placeholder_ctv3, placeholder_icd10, placeholder_dmd],
     "cov_ever_obesity": [placeholder_ctv3, placeholder_icd10],
     "cov_ever_depression": [placeholder_ctv3, placeholder_icd10],
@@ -176,6 +179,14 @@ study = StudyDefinition(
                     "South East": 0.2,
                 },
             },
+        },
+    ),
+    cov_n_disorder=patients.with_gp_consultations(
+        between=["index_date - 12 months", "index_date"],
+        returning="number_of_matches_in_period",
+        return_expectations={
+            "int": {"distribution": "normal", "mean": 10, "stddev": 3},
+            "incidence": 1,
         },
     ),
     **covariates,

@@ -27,6 +27,10 @@ def get_variable_definition(codelist, name):
         return patients.admitted_to_hospital(
             with_these_diagnoses=codelist, on_or_before="index_date"
         )
+    if codelist.system == "opcs4":
+        return patients.admitted_to_hospital(
+            with_these_procedures=codelist, on_or_before="index_date"
+        )
 
 
 def retrieve_name(var):
