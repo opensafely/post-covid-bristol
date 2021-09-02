@@ -1,5 +1,4 @@
-from os import system
-from cohortextractor import codelist, codelist_from_csv
+from cohortextractor import codelist_from_csv
 
 opensafely_ethnicity_codes_16 = codelist_from_csv(
     "codelists/opensafely-ethnicity.csv",
@@ -29,7 +28,7 @@ smoking_unclear = codelist_from_csv(
     category_column="Category",
 )
 
-ami_snomed = codelist_from_csv(
+ami_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-ami_snomed.csv",
     system="snomed",
     column="code",
@@ -53,7 +52,7 @@ artery_dissect_icd10 = codelist_from_csv(
     column="code",
 )
 
-bmi_obesity_snomed = codelist_from_csv(
+bmi_obesity_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-bmi_obesity_snomed.csv",
     system="snomed",
     column="code",
@@ -65,7 +64,7 @@ bmi_obesity_icd10 = codelist_from_csv(
     column="code",
 )
 
-cancer_snomed = codelist_from_csv(
+cancer_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-cancer_snomed.csv",
     system="snomed",
     column="code",
@@ -76,7 +75,7 @@ cancer_icd10 = codelist_from_csv(
     system="icd10",
     column="code",
 )
-cardiomyopathy_snomed = codelist_from_csv(
+cardiomyopathy_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-cardiomyopathy_snomed.csv",
     system="snomed",
     column="code",
@@ -88,7 +87,7 @@ cardiomyopathy_icd10 = codelist_from_csv(
     column="code",
 )
 
-ckd_snomed = codelist_from_csv(
+ckd_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-ckd_snomed.csv",
     system="snomed",
     column="code",
@@ -100,7 +99,7 @@ ckd_icd10 = codelist_from_csv(
     column="code",
 )
 
-copd_snomed = codelist_from_csv(
+copd_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-copd_snomed.csv",
     system="snomed",
     column="code",
@@ -112,7 +111,7 @@ copd_icd10 = codelist_from_csv(
     column="code",
 )
 
-dementia_snomed = codelist_from_csv(
+dementia_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-dementia_snomed.csv",
     system="snomed",
     column="code",
@@ -142,7 +141,7 @@ dvt_icvt_icd10 = codelist_from_csv(
     column="code",
 )
 
-dvt_icvt_snomed = codelist_from_csv(
+dvt_icvt_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-dvt_icvt_snomed.csv",
     system="snomed",
     column="code",
@@ -154,7 +153,7 @@ dvt_pregnancy_icd10 = codelist_from_csv(
     column="code",
 )
 
-hf_snomed = codelist_from_csv(
+hf_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-hf_snomed.csv",
     system="snomed",
     column="code",
@@ -172,7 +171,7 @@ stroke_isch_icd10 = codelist_from_csv(
     column="code",
 )
 
-stroke_isch_snomed = codelist_from_csv(
+stroke_isch_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-stroke_isch_snomed.csv",
     system="snomed",
     column="code",
@@ -184,7 +183,7 @@ stroke_sah_hs_icd10 = codelist_from_csv(
     column="code",
 )
 
-stroke_sah_hs_snomed = codelist_from_csv(
+stroke_sah_hs_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-stroke_sah_hs_snomed.csv",
     system="snomed",
     column="code",
@@ -196,7 +195,7 @@ pe_icd10 = codelist_from_csv(
     column="code",
 )
 
-pe_snomed = codelist_from_csv(
+pe_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-pe_snomed.csv",
     system="snomed",
     column="code",
@@ -232,13 +231,13 @@ thrombophilia_icd10 = codelist_from_csv(
     column="code",
 )
 
-thrombophilia_snomed = codelist_from_csv(
+thrombophilia_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-thrombophilia_snomed.csv",
     system="snomed",
     column="code",
 )
 
-tcp_snomed = codelist_from_csv(
+tcp_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-tcp_snomed.csv",
     system="snomed",
     column="code",
@@ -256,7 +255,7 @@ thrombocytopenia_icd10 = codelist_from_csv(
     column="code",
 )
 
-dementia_vascular_snomed = codelist_from_csv(
+dementia_vascular_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-dementia_vascular_snomed.csv",
     system="snomed",
     column="code",
@@ -268,7 +267,7 @@ dementia_vascular_icd10 = codelist_from_csv(
     column="code",
 )
 
-liver_disease_snomed = codelist_from_csv(
+liver_disease_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-liver_disease_snomed.csv",
     system="snomed",
     column="code",
@@ -280,7 +279,7 @@ liver_disease_icd10 = codelist_from_csv(
     column="code",
 )
 
-diabetes_snomed = codelist_from_csv(
+diabetes_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-diabetes_snomed.csv",
     system="snomed",
     column="code",
@@ -304,7 +303,7 @@ depression_icd10 = codelist_from_csv(
     column="code",
 )
 
-depression_snomed = codelist_from_csv(
+depression_snomed_clinical = codelist_from_csv(
     "codelists/user-elsie_horne-depression_snomed.csv",
     system="snomed",
     column="code",
@@ -382,7 +381,7 @@ hypertension_drugs_dmd = codelist_from_csv(
     column="dmd_id",
 )
 
-hypertension_snomed = codelist_from_csv(
+hypertension_snomed_clinical = codelist_from_csv(
     "codelists/nhsd-primary-care-domain-refsets-hyp_cod.csv",
     system="snomed",
     column="code",
