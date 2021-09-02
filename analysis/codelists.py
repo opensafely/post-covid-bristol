@@ -30,7 +30,7 @@ smoking_unclear = codelist_from_csv(
 )
 
 ami_snomed = codelist_from_csv(
-    "user-elsie_horne-ami_snomed-36d11028.csv",
+    "user-elsie_horne-ami_snomed.csv",
     system="snomed",
     column="code",
 )
