@@ -30,360 +30,360 @@ smoking_unclear = codelist_from_csv(
 )
 
 ami_snomed = codelist_from_csv(
-    "user-elsie_horne-ami_snomed.csv",
+    "codelists/user-elsie_horne-ami_snomed.csv",
     system="snomed",
     column="code",
 )
 
 ami_icd10 = codelist_from_csv(
-    "user/elsie_horne/ami_snomed/4f19cfce.csv",
+    "codelists/user-elsie_horne-ami_icd10.csv",
     system="icd10",
     column="code",
 )
 
 ami_prior_icd10 = codelist_from_csv(
-    "user/elsie_horne/ami_prior_icd10/360a5c99.csv",
+    "codelists/user-elsie_horne-ami_prior_icd10.csv",
     system="icd10",
     column="code",
 )
 
 artery_dissect_icd10 = codelist_from_csv(
-    "user/elsie_horne/artery_dissect_icd10/20745ce9.csv",
+    "codelists/user-elsie_horne-artery_dissect_icd10.csv",
     system="icd10",
     column="code",
 )
 
 bmi_obesity_snomed = codelist_from_csv(
-    "user/elsie_horne/bmi_obesity_snomed/0764e9b4.csv",
+    "codelists/user-elsie_horne-bmi_obesity_snomed.csv",
     system="snomed",
     column="code",
 )
 
 bmi_obesity_icd10 = codelist_from_csv(
-    "user/elsie_horne/bmi_obesity_icd10/6e55767e.csv",
+    "codelists/user-elsie_horne-bmi_obesity_icd10.csv",
     system="icd10",
     column="code",
 )
 
 cancer_snomed = codelist_from_csv(
-    "user/elsie_horne/cancer_snomed/23271cdf.csv",
+    "codelists/user-elsie_horne-cancer_snomed.csv",
     system="snomed",
     column="code",
 )
 
 cancer_icd10 = codelist_from_csv(
-    "user/elsie_horne/cancer_icd10/55460349.csv",
+    "codelists/user-elsie_horne-cancer_icd10.csv",
     system="icd10",
     column="code",
 )
 cardiomyopathy_snomed = codelist_from_csv(
-    "user/elsie_horne/cardiomyopathy_snomed/0a17a9aa.csv",
+    "codelists/user-elsie_horne-cardiomyopathy_snomed.csv",
     system="snomed",
     column="code",
 )
 
 cardiomyopathy_icd10 = codelist_from_csv(
-    "user/elsie_horne/cardiomyopathy_icd10/71083674.csv",
+    "codelists/user-elsie_horne-cardiomyopathy_icd10.csv",
     system="icd10",
     column="code",
 )
 
 ckd_snomed = codelist_from_csv(
-    "user/elsie_horne/ckd_snomed/25d9dcd5.csv",
+    "codelists/user-elsie_horne-ckd_snomed.csv",
     system="snomed",
     column="code",
 )
 
 ckd_icd10 = codelist_from_csv(
-    "user/elsie_horne/ckd_icd10/0cca69a0.csv",
+    "codelists/user-elsie_horne-ckd_icd10.csv",
     system="icd10",
     column="code",
 )
 
 copd_snomed = codelist_from_csv(
-    "user/elsie_horne/copd_snomed/419c1000.csv",
+    "codelists/user-elsie_horne-copd_snomed.csv",
     system="snomed",
     column="code",
 )
 
 copd_icd10 = codelist_from_csv(
-    "user/elsie_horne/copd_icd10/5aab8335.csv",
+    "codelists/user-elsie_horne-copd_icd10.csv",
     system="icd10",
     column="code",
 )
 
 dementia_snomed = codelist_from_csv(
-    "user/elsie_horne/dementia_snomed/7bd3364ccsv",
+    "codelists/user-elsie_horne-dementia_snomed.csv",
     system="snomed",
     column="code",
 )
 
 dementia_icd10 = codelist_from_csv(
-    "user/elsie_horne/dementia_icd10/2df21cb7.csv",
+    "codelists/user-elsie_horne-dementia_icd10.csv",
     system="icd10",
     column="code",
 )
 
 dic_icd10 = codelist_from_csv(
-    "user/elsie_horne/dic_icd10/62c3c317.csv",
+    "codelists/user-elsie_horne-dic_icd10.csv",
     system="icd10",
     column="code",
 )
 
 dvt_dvt_icd10 = codelist_from_csv(
-    "user/elsie_horne/dvt_dvt_icd10/49b44fe2.csv",
+    "codelists/user-elsie_horne-dvt_dvt_icd10.csv",
     system="icd10",
     column="code",
 )
 
 dvt_icvt_icd10 = codelist_from_csv(
-    "user/elsie_horne/dvt_icvt_icd10/30a4dcad.csv",
+    "codelists/user-elsie_horne-dvt_icvt_icd10.csv",
     system="icd10",
     column="code",
 )
 
 dvt_icvt_snomed = codelist_from_csv(
-    "user/elsie_horne/dvt_icvt_snomed/7e85f642.csv",
+    "codelists/user-elsie_horne-dvt_icvt_snomed.csv",
     system="snomed",
     column="code",
 )
 
 dvt_pregnancy_icd10 = codelist_from_csv(
-    "user/elsie_horne/dvt_pregnancy_icd10/6576830d.csv",
+    "codelists/user-elsie_horne-dvt_pregnancy_icd10.csv",
     system="icd10",
     column="code",
 )
 
 hf_snomed = codelist_from_csv(
-    "user/elsie_horne/hf_snomed/33579ca3.csv",
+    "codelists/user-elsie_horne-hf_snomed.csv",
     system="snomed",
     column="code",
 )
 
 hf_icd10 = codelist_from_csv(
-    "user/elsie_horne/hf_icd10/4c670fd8.csv",
+    "codelists/user-elsie_horne-hf_icd10.csv",
     system="icd10",
     column="code",
 )
 
 stroke_isch_icd10 = codelist_from_csv(
-    "user/elsie_horne/stroke_isch_icd10/03eb762f.csv",
+    "codelists/user-elsie_horne-stroke_isch_icd10.csv",
     system="icd10",
     column="code",
 )
 
 stroke_isch_snomed = codelist_from_csv(
-    "user/elsie_horne/stroke_isch_snomed/1cfae964.csv",
+    "codelists/user-elsie_horne-stroke_isch_snomed.csv",
     system="snomed",
     column="code",
 )
 
 stroke_sah_hs_icd10 = codelist_from_csv(
-    "user/elsie_horne/stroke_sah_hs_icd10/51cc8fc4.csv",
+    "codelists/user-elsie_horne-stroke_sah_hs_icd10.csv",
     system="icd10",
     column="code",
 )
 
 stroke_sah_hs_snomed = codelist_from_csv(
-    "user/elsie_horne/stroke_sah_hs_snomed/6adc02f9.csv",
+    "codelists/user-elsie_horne-stroke_sah_hs_snomed.csv",
     system="snomed",
     column="code",
 )
 
 pe_icd10 = codelist_from_csv(
-    "user/elsie_horne/pe_icd10/069e3625.csv",
+    "codelists/user-elsie_horne-pe_icd10.csv",
     system="icd10",
     column="code",
 )
 
 pe_snomed = codelist_from_csv(
-    "user/elsie_horne/pe_snomed/6d8ec2ef.csv",
+    "codelists/user-elsie_horne-pe_snomed.csv",
     system="snomed",
     column="code",
 )
 
 other_dvt_icd10 = codelist_from_csv(
-    "user/elsie_horne/other_dvt_icd10/547f4fba.csv",
+    "codelists/user-elsie_horne-other_dvt_icd10.csv",
     system="icd10",
     column="code",
 )
 
 icvt_pregnancy_icd10 = codelist_from_csv(
-    "user/elsie_horne/icvt_pregnancy_icd10/3b6fdc85.csv",
+    "codelists/user-elsie_horne-icvt_pregnancy_icd10.csv",
     system="icd10",
     column="code",
 )
 
 portal_vein_thrombosis_icd10 = codelist_from_csv(
-    "user/elsie_horne/portal_vein_thrombosis_icd10/22606950.csv",
+    "codelists/user-elsie_horne-portal_vein_thrombosis_icd10.csv",
     system="icd10",
     column="code",
 )
 
 vt_icd10 = codelist_from_csv(
-    "user/elsie_horne/vt_icd10/0950f61b.csv",
+    "codelists/user-elsie_horne-vt_icd10.csv",
     system="icd10",
     column="code",
 )
 
 thrombophilia_icd10 = codelist_from_csv(
-    "user/elsie_horne/thrombophilia_icd10/704182e5.csv",
+    "codelists/user-elsie_horne-thrombophilia_icd10.csv",
     system="icd10",
     column="code",
 )
 
 thrombophilia_snomed = codelist_from_csv(
-    "user/elsie_horne/thrombophilia_snomed/57320fb0.csv",
+    "codelists/user-elsie_horne-thrombophilia_snomed.csv",
     system="snomed",
     column="code",
 )
 
 tcp_snomed = codelist_from_csv(
-    "user/elsie_horne/tcp_snomed/3e229c7b.csv",
+    "codelists/user-elsie_horne-tcp_snomed.csv",
     system="snomed",
     column="code",
 )
 
 ttp_icd10 = codelist_from_csv(
-    "user/elsie_horne/ttp_icd10/25132946.csv",
+    "codelists/user-elsie_horne-ttp_icd10.csv",
     system="icd10",
     column="code",
 )
 
 thrombocytopenia_icd10 = codelist_from_csv(
-    "user/elsie_horne/thrombocytopenia_icd10/0c03b611.csv",
+    "codelists/user-elsie_horne-thrombocytopenia_icd10.csv",
     system="icd10",
     column="code",
 )
 
 dementia_vascular_snomed = codelist_from_csv(
-    "user/elsie_horne/dementia_vascular_snomed/0eb67607.csv",
+    "codelists/user-elsie_horne-dementia_vascular_snomed.csv",
     system="snomed",
     column="code",
 )
 
 dementia_vascular_icd10 = codelist_from_csv(
-    "user/elsie_horne/dementia_vascular_icd10/27c5e93c.csv",
+    "codelists/user-elsie_horne-dementia_vascular_icd10.csv",
     system="icd10",
     column="code",
 )
 
 liver_disease_snomed = codelist_from_csv(
-    "user/elsie_horne/liver_disease_snomed/5c978f9c.csv",
+    "codelists/user-elsie_horne-liver_disease_snomed.csv",
     system="snomed",
     column="code",
 )
 
 liver_disease_icd10 = codelist_from_csv(
-    "user/elsie_horne/liver_disease_icd10/75a702d1.csv",
+    "codelists/user-elsie_horne-liver_disease_icd10.csv",
     system="icd10",
     column="code",
 )
 
 diabetes_snomed = codelist_from_csv(
-    "user/elsie_horne/diabetes_snomed/43881c67.csv",
+    "codelists/user-elsie_horne-diabetes_snomed.csv",
     system="snomed",
     column="code",
 )
 
 diabetes_icd10 = codelist_from_csv(
-    "user/elsie_horne/diabetes_icd10/2a78a932.csv",
+    "codelists/user-elsie_horne-diabetes_icd10.csv",
     system="icd10",
     column="code",
 )
 
 diabetes_drugs_dmd = codelist_from_csv(
-    "user/elsie_horne/diabetes_drugs_dmd/3228dace.csv",
+    "codelists/user-elsie_horne-diabetes_drugs_dmd.csv",
     system="snomed",
     column="code",
 )
 
 depression_icd10 = codelist_from_csv(
-    "user/elsie_horne/depression_icd10/116935fd.csv",
+    "codelists/user-elsie_horne-depression_icd10.csv",
     system="icd10",
     column="code",
 )
 
 depression_snomed = codelist_from_csv(
-    "user/elsie_horne/depression_snomed/7859c2c7.csv",
+    "codelists/user-elsie_horne-depression_snomed.csv",
     system="snomed",
     column="code",
 )
 
 antiplatelet_dmd = codelist_from_csv(
-    "user/elsie_horne/user/elsie_horne/antiplatelet_dmd/61950142.csv",
+    "codelists/user-elsie_horne-codelists/user-elsie_horne-antiplatelet_dmd.csv",
     system="snomed",
     column="code",
 )
 
 lipid_lowering_dmd = codelist_from_csv(
-    "user/elsie_horne/lipid_lowering_dmd/66fa812e.csv",
+    "codelists/user-elsie_horne-lipid_lowering_dmd.csv",
     system="snomed",
     column="code",
 )
 
 anticoagulant_dmd = codelist_from_csv(
-    "user/elsie_horne/auser/elsie_horne/anticoagulant_dmd/7aa47477.csv",
+    "codelists/user-elsie_horne-acodelists/user-elsie_horne-anticoagulant_dmd.csv",
     system="snomed",
     column="code",
 )
 
 cocp_dmd = codelist_from_csv(
-    "user/elsie_horne/cocp_dmd/1666a7a3.csv",
+    "codelists/user-elsie_horne-cocp_dmd.csv",
     system="snomed",
     column="code",
 )
 
 hrt_dmd = codelist_from_csv(
-    "user/elsie_horne/hrt_dmd/19196799.csv",
+    "codelists/user-elsie_horne-hrt_dmd.csv",
     system="snomed",
     column="code",
 )
 
 other_arterial_embolism_icd10 = codelist_from_csv(
-    "user/elsie_horne/other_arterial_embolism_icd10/463adc5d.csv",
+    "codelists/user-elsie_horne-other_arterial_embolism_icd10.csv",
     system="icd10",
     column="code",
 )
 
 mesenteric_thrombus_icd10 = codelist_from_csv(
-    "user/elsie_horne/mesenteric_thrombus_icd10/2d2b6928.csv",
+    "codelists/user-elsie_horne-mesenteric_thrombus_icd10.csv",
     system="icd10",
     column="code",
 )
 
 life_arrhythmia_icd10 = codelist_from_csv(
-    "user/elsie_horne/life_arrhythmia_icd10/141bf5f3.csv",
+    "codelists/user-elsie_horne-life_arrhythmia_icd10.csv",
     system="icd10",
     column="code",
 )
 
 pericarditis_icd10 = codelist_from_csv(
-    "user/elsie_horne/pericarditis_icd10/7b0c82bd.csv",
+    "codelists/user-elsie_horne-pericarditis_icd10.csv",
     system="icd10",
     column="code",
 )
 
 myocarditis_icd10 = codelist_from_csv(
-    "user/elsie_horne/myocarditis_icd10/48ed9c53.csv",
+    "codelists/user-elsie_horne-myocarditis_icd10.csv",
     system="icd10",
     column="code",
 )
 
 hypertension_icd10 = codelist_from_csv(
-    "user/elsie_horne/hypertension_icd10/1a48296e.csv",
+    "codelists/user-elsie_horne-hypertension_icd10.csv",
     system="icd10",
     column="code",
 )
 
 hypertension_drugs_dmd = codelist_from_csv(
-    "user/elsie_horne/hypertension_drugs_dmd/0009f464.csv",
+    "codelists/user-elsie_horne-hypertension_drugs_dmd.csv",
     system="snomed",
     column="code",
 )
 
 hypertension_snomed = codelist_from_csv(
-    "nhsd-primary-care-domain-refsets/hyp_cod/20210127.csv",
+    "nhsd-primary-care-domain-refsets/hyp_cod.csv",
     system="snomed",
     column="code",
 )
