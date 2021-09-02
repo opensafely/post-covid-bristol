@@ -10,7 +10,7 @@ from variable_loop import get_codelist_variable
 
 placeholder_ctv3 = codelist(["codes"], system="ctv3")
 placeholder_icd10 = codelist(["codes"], system="icd10")
-placeholder_dmd = codelist(["codes"], system="snomed")
+placeholder_dmd = codelist(["dmd_id"], system="snomed")
 
 variables = {
     "cov_ever_ami": [ami_snomed, ami_icd10, ami_prior_icd10],

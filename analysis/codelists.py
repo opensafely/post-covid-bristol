@@ -311,7 +311,7 @@ depression_snomed = codelist_from_csv(
 )
 
 antiplatelet_dmd = codelist_from_csv(
-    "codelists/user-elsie_horne-codelists/user-elsie_horne-antiplatelet_dmd.csv",
+    "codelists/user-elsie_horne-antiplatelet_dmd.csv",
     system="snomed",
     column="dmd_id",
 )
@@ -323,7 +323,7 @@ lipid_lowering_dmd = codelist_from_csv(
 )
 
 anticoagulant_dmd = codelist_from_csv(
-    "codelists/user-elsie_horne-acodelists/user-elsie_horne-anticoagulant_dmd.csv",
+    "codelists/user-elsie_horne-anticoagulant_dmd.csv",
     system="snomed",
     column="dmd_id",
 )
@@ -383,7 +383,7 @@ hypertension_drugs_dmd = codelist_from_csv(
 )
 
 hypertension_snomed = codelist_from_csv(
-    "nhsd-primary-care-domain-refsets/hyp_cod.csv",
+    "nhsd-primary-care-domain-refsets-hyp_cod.csv",
     system="snomed",
     column="code",
 )
