@@ -179,11 +179,11 @@ study = StudyDefinition(
             },
         },
     ),
-    cov_ever_ami=patients.with_these_clinical_events(
-        codelist, # how do I define codelists making use of get_codelist_variable (line 47)
-        return_expectations=None, # enter the expected proportion of patients with ever AMI here?
-        on_or_before="index_date", 
-        returning='binary_flag', 
-        ),
+    # cov_ever_ami=patients.with_these_clinical_events(
+        # codelist, # how do I define codelists making use of get_codelist_variable (line 47)
+        # return_expectations=None, # enter the expected proportion of patients with ever AMI here?
+        # on_or_before="index_date", 
+        # returning='binary_flag', 
+        # ),
     **covariates,
 )
