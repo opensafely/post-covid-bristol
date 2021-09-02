@@ -43,6 +43,7 @@ variables = {
     "cov_ever_hf": [codelists.hf_snomed, codelists.hf_icd10],
     "cov_ever_pericarditis": [codelists.pericarditis_icd10],
     "cov_ever_myocarditis": [codelists.myocarditis_icd10],
+
 }
 
 covariates = {k: get_codelist_variable(v) for k, v in variables.items()}
@@ -180,11 +181,13 @@ study = StudyDefinition(
             },
         },
     ),
-    # cov_ever_ami=patients.with_these_clinical_events(
-        # codelist, # how do I define codelists making use of get_codelist_variable (line 47)
-        # return_expectations=None, # enter the expected proportion of patients with ever AMI here?
-        # on_or_before="index_date", 
-        # returning='binary_flag', 
-        # ),
+    cov_n_disorder=patients.with_gp_consultations(
+        between=["index_date - 12 months", "index_date"],
+        returning="number_of_matches_in_period",
+        return_expectations={
+            "int": {"distribution": "normal", "mean": 10, "stddev": 3},
+            "incidence": 1,
+        },
+    ),
     **covariates,
 )
