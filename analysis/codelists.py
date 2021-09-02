@@ -292,8 +292,8 @@ diabetes_icd10 = codelist_from_csv(
     column="code",
 )
 
-diabetes_drugs = codelist_from_csv(
-    "opensafely/bristol_diabetes_drugs/60110321.csv",
+diabetes_drugs_dmd = codelist_from_csv(
+    "user/elsie_horne/diabetes_drugs_dmd/3228dace.csv",
     system="snomed",
     column="code",
 )
@@ -310,32 +310,32 @@ depression_snomed = codelist_from_csv(
     column="code",
 )
 
-antiplatelet = codelist_from_csv(
-    "user/elsie_horne/antiplatelet/316b903c.csv",
+antiplatelet_dmd = codelist_from_csv(
+    "user/elsie_horne/user/elsie_horne/antiplatelet_dmd/61950142.csv",
     system="snomed",
     column="code",
 )
 
-lipid_lowering = codelist_from_csv(
-    "user/elsie_horne/lipid_lowering/341e5032.csv",
+lipid_lowering_dmd = codelist_from_csv(
+    "user/elsie_horne/lipid_lowering_dmd/66fa812e.csv",
     system="snomed",
     column="code",
 )
 
-anticoagulant = codelist_from_csv(
-    "user/elsie_horne/anticoagulant/4a7b0371.csv",
+anticoagulant_dmd = codelist_from_csv(
+    "user/elsie_horne/auser/elsie_horne/anticoagulant_dmd/7aa47477.csv",
     system="snomed",
     column="code",
 )
 
-cocp = codelist_from_csv(
-    "user/elsie_horne/cocp/185c1d07.csv",
+cocp_dmd = codelist_from_csv(
+    "user/elsie_horne/cocp_dmd/1666a7a3.csv",
     system="snomed",
     column="code",
 )
 
-hrt = codelist_from_csv(
-    "user/elsie_horne/hrt/7f4ca9d1.csv",
+hrt_dmd = codelist_from_csv(
+    "user/elsie_horne/hrt_dmd/19196799.csv",
     system="snomed",
     column="code",
 )
@@ -376,8 +376,8 @@ hypertension_icd10 = codelist_from_csv(
     column="code",
 )
 
-hypertension_drugs = codelist_from_csv(
-    "opensafely/bristol_hypertension/79207656.csv",
+hypertension_drugs_dmd = codelist_from_csv(
+    "user/elsie_horne/hypertension_drugs_dmd/0009f464.csv",
     system="snomed",
     column="code",
 )
