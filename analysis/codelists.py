@@ -383,7 +383,7 @@ hypertension_drugs_dmd = codelist_from_csv(
 )
 
 hypertension_snomed = codelist_from_csv(
-    "nhsd-primary-care-domain-refsets-hyp_cod.csv",
+    "codelists/nhsd-primary-care-domain-refsets-hyp_cod.csv",
     system="snomed",
     column="code",
 )
