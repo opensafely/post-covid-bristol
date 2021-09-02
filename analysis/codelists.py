@@ -295,7 +295,7 @@ diabetes_icd10 = codelist_from_csv(
 diabetes_drugs_dmd = codelist_from_csv(
     "codelists/user-elsie_horne-diabetes_drugs_dmd.csv",
     system="snomed",
-    column="code",
+    column="dmd_id",
 )
 
 depression_icd10 = codelist_from_csv(
@@ -313,31 +313,31 @@ depression_snomed = codelist_from_csv(
 antiplatelet_dmd = codelist_from_csv(
     "codelists/user-elsie_horne-codelists/user-elsie_horne-antiplatelet_dmd.csv",
     system="snomed",
-    column="code",
+    column="dmd_id",
 )
 
 lipid_lowering_dmd = codelist_from_csv(
     "codelists/user-elsie_horne-lipid_lowering_dmd.csv",
     system="snomed",
-    column="code",
+    column="dmd_id",
 )
 
 anticoagulant_dmd = codelist_from_csv(
     "codelists/user-elsie_horne-acodelists/user-elsie_horne-anticoagulant_dmd.csv",
     system="snomed",
-    column="code",
+    column="dmd_id",
 )
 
 cocp_dmd = codelist_from_csv(
     "codelists/user-elsie_horne-cocp_dmd.csv",
     system="snomed",
-    column="code",
+    column="dmd_id",
 )
 
 hrt_dmd = codelist_from_csv(
     "codelists/user-elsie_horne-hrt_dmd.csv",
     system="snomed",
-    column="code",
+    column="dmd_id",
 )
 
 other_arterial_embolism_icd10 = codelist_from_csv(
@@ -379,7 +379,7 @@ hypertension_icd10 = codelist_from_csv(
 hypertension_drugs_dmd = codelist_from_csv(
     "codelists/user-elsie_horne-hypertension_drugs_dmd.csv",
     system="snomed",
-    column="code",
+    column="dmd_id",
 )
 
 hypertension_snomed = codelist_from_csv(
