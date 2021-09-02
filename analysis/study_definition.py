@@ -9,6 +9,7 @@ import study_def_helper_functions as helpers
 from variable_loop import get_codelist_variable
 
 placeholder_ctv3 = codelist(["codes"], system="ctv3")
+placeholder_snomed = codelist(["codes"], system="snomed")
 placeholder_icd10 = codelist(["codes"], system="icd10")
 placeholder_dmd = codelist(["dmd_id"], system="snomed")
 
