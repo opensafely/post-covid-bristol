@@ -32,15 +32,16 @@ rm(list=setdiff(ls(), c("con")))
 gc()
 
 # specify model 
-mdl <- "mdl3b_fullyadj" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
+mdl <- "mdl2_agesex" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
 # specify results directory -- I use res_dir/res_dir_date (of course the latter can be not a date)
-res_dir_proj <- "~/CCU002_01/results_infection"
-res_dir_date <- "2021-08-07"
+res_dir_proj <- "output"
+res_dir_date <- "covidpheno"
 # specify path to scripts' directory
-scripts_dir <- "~/CCU002_01/scripts_si"
+scripts_dir <- "analysis"
 
 # specify model parameters, data source, outcomes of interest, read in relevant data, get prepped covariates
-source(file.path(scripts_dir, "si_02_pipe.R"))
+# source(file.path(scripts_dir, "si_02_pipe.R"))
+source(file.path(scripts_dir, "si_02_pipe_covidpheno.R"))
 
 
 gc()
@@ -49,16 +50,16 @@ gc()
 # -----------SET MODEL-SPECIFIC RESULTS DIR  & CALLS MODEL SCRIPT --------------
 if (mdl == "mdl1_unadj"){
   res_dir <- file.path(res_dir_proj, res_dir_date, "unadj_nosexforcombined")
-  source(file.path(scripts_dir,"si_call_mdl1_unadj.R"))
+  source(file.path(scripts_dir,"si_call_mdl1_unadj_covidpheno.R"))
 } else if (mdl == "mdl2_agesex"){
   res_dir <- file.path(res_dir_proj, res_dir_date, "adj_age_sex_only")
-  source(file.path(scripts_dir,"si_call_mdl3b_fullyadj.R"))
+  source(file.path(scripts_dir,"si_call_mdl3b_fullyadj_covidpheno.R"))
 } else if (mdl == "mdl3a_bkwdselect"){
   res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_bkwdselect")
   source(file.path(scripts_dir,"si_call_mdl3a_bkwdselect.R"))
 } else if (mdl == "mdl3b_fullyadj"){
   res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_bkwdselect")
-  source(file.path(scripts_dir,"si_call_mdl3b_fullyadj.R"))
+  source(file.path(scripts_dir,"si_call_mdl3b_fullyadj_covidpheno.R"))
 } else if (mdl == "mdl4_fullinteract_suppl34"){
   res_dir <- file.path(res_dir_proj, res_dir_date, "interactionterm")
   source(file.path(scripts_dir,"si_call_mdl4_fullinteract_interactionterm.R"))
@@ -68,8 +69,10 @@ if (mdl == "mdl1_unadj"){
 } else if ((mdl == "mdl5_anydiag_death28days") & (data_version == "anydiag")){
   res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_anydiag")
   source(file.path(scripts_dir,"si_call_mdl3b_fullyadj.R"))
-}# creates if does not exist and sets working directory
-#dir.create(file.path(res_dir), recursive =TRUE)
+}
+
+# creates if does not exist and sets working directory
+dir.create(file.path(res_dir), showWarnings = FALSE)
 setwd(file.path(res_dir))
 
 
@@ -108,26 +111,30 @@ if (mdl == "mdl4_fullinteract_suppl34"){
     }
   }
 } else {
-  outcome_age_combos <- expand.grid(ls_events, agelabels)
-  names(outcome_age_combos) <- c("event", "agegp")
-  ls_should_have <- pmap(list(outcome_age_combos$event, outcome_age_combos$agegp), 
-                         function(event, agegp) 
-                           file.path(res_dir,
-                                  paste0("tbl_hr_INFECTION_",
+  outcome_age_vac_combos <- expand.grid(ls_events, agelabels, c("non_hospitalised", "hospitalised"))
+  names(outcome_age_vac_combos) <- c("event", "agegp", "vac")
+  ls_should_have <- pmap(list(outcome_age_vac_combos$event, outcome_age_vac_combos$agegp, outcome_age_vac_combos$vac), 
+                         function(event, agegp, vac) 
+                           paste0(res_dir,
+                                  "tbl_hr_INFECTION_",
                                   event, "_",
-                                  agegp, ".csv")
+                                  agegp, "_",
+                                  vac, ".csv"
                            ))
   
   ls_should_have <- unlist(ls_should_have)
   
   ls_events_missing <- data.frame()
   
-  for (i in 1:nrow(outcome_age_combos)) {
-    row <- outcome_age_combos[i,]
+  for (i in 1:nrow(outcome_age_vac_combos)) {
+    row <- outcome_age_vac_combos[i,]
     fpath <- file.path(res_dir,
                     paste0("tbl_hr_INFECTION_",
                     row$event, "_",
-                    row$agegp, ".csv"))
+                    row$agegp, "_",
+                    row$vac, ".csv"))
+  
+  
     
     if (!file.exists(fpath)) {
       ls_events_missing <- rbind(ls_events_missing, row)
@@ -155,22 +162,24 @@ if (mdl == "mdl4_fullinteract_suppl34"){
                      cohort_start_date, cohort_end_date, noncase_frac=0.1))
   
 } else if (mdl %in% c("mdl3b_fullyadj", "mdl5_anydiag_death28days")) {
-   mclapply(split(ls_events_missing,seq(nrow(ls_events_missing))), mc.cores = 2,
-   #lapply(split(ls_events_missing,seq(nrow(ls_events_missing))),
+   mclapply(split(ls_events_missing,seq(nrow(ls_events_missing))), mc.cores = 1,
+   # lapply(split(ls_events_missing,seq(nrow(ls_events_missing))),
            function(ls_events_missing) 
              get_vacc_res(
                sex_as_interaction=FALSE,
-               event=ls_events_missing$event, 
+               event=ls_events_missing$event,
+               pheno_str=ls_events_missing$vac,
                agegp=ls_events_missing$agegp, 
                cohort_vac, covars)
            )
 } else if(mdl %in% c("mdl1_unadj", "mdl2_agesex")){
-  mclapply(split(ls_events_missing,seq(nrow(ls_events_missing))), mc.cores = 2,
+  mclapply(split(ls_events_missing,seq(nrow(ls_events_missing))), mc.cores = 3,
     # lapply(split(ls_events_missing,seq(nrow(ls_events_missing))),
            function(ls_events_missing) 
              get_vacc_res(
                sex_as_interaction=FALSE,
-               event=ls_events_missing$event, 
+               event=ls_events_missing$event,
+               pheno_str=ls_events_missing$vac,
                agegp=ls_events_missing$agegp, 
                cohort_vac, covars)
     )
