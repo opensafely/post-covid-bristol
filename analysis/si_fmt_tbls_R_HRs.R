@@ -22,8 +22,8 @@ detectCores()
 rm(list=ls())
 
 #========================== HRs phenotypes ===============================
-res_dir_proj <- "~/CCU002_01/results_infection"
-res_dir_date <- "2021-08-07"
+res_dir_proj <- "output"
+res_dir_date <- "covidpheno"
 mdl <- "mdl3b_fullyadj" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
 data_version <- "death28days" # death28days, anydiag
 
@@ -46,7 +46,7 @@ setwd(file.path(res_dir))
 
 
 
-ls_events <- c("thrombocytopenia","pericarditis","PE","other_DVT","mesenteric_thrombus","life_arrhythmia","DVT_event","angina","AMI","myocarditis","stroke_TIA","stroke_isch")
+ls_events <- c("AMI")
 print(ls_events)
 # ls_events <- ls_events[!ls_events %in% c("DIC", "TTP")]
 
@@ -118,31 +118,30 @@ write.csv(df_hr, file = file.path(res_dir, "hrs_vac.csv") , row.names=F)
 
 
 #========================== HRs no pheno ===============================
-res_dir_proj <- "~/CCU002_01/results_infection"
-res_dir_date <- "2021-08-07"
+res_dir_proj <- "output"
 mdl <- "mdl3b_fullyadj" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
 data_version <- "death28days" # death28days, anydiag
 
 if (mdl == "mdl1_unadj"){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "unadj_nosexforcombined")
+  res_dir <- file.path(res_dir_proj, "unadj_nosexforcombined")
 } else if (mdl == "mdl2_agesex"){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "adj_age_sex_only")
+  res_dir <- file.path(res_dir_proj, "adj_age_sex_only")
 } else if (mdl == "mdl3a_bkwdselect"){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_bkwdselect")
+  res_dir <- file.path(res_dir_proj, "fully_adj_bkwdselect")
 } else if (mdl == "mdl3b_fullyadj"){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_bkwdselect")
+  res_dir <- file.path(res_dir_proj, "fully_adj_bkwdselect")
 } else if (mdl == "mdl4_fullinteract_suppl34"){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "interactionterm")
+  res_dir <- file.path(res_dir_proj, "interactionterm")
 } else if ((mdl == "mdl5_anydiag_death28days") & (data_version == "death28days")){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_death28days")
+  res_dir <- file.path(res_dir_proj, "fully_adj_death28days")
 } else if ((mdl == "mdl5_anydiag_death28days") & (data_version == "anydiag")){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_anydiag")
+  res_dir <- file.path(res_dir_proj, "fully_adj_anydiag")
 }
 setwd(file.path(res_dir))
 
 
 
-ls_events <- c("thrombocytopenia","pericarditis","PE","other_DVT","mesenteric_thrombus","life_arrhythmia","DVT_event","angina","AMI","myocarditis","stroke_TIA","stroke_isch","other_arterial_embolism","Arterial_event","fracture","stroke_SAH_HS","Venous_event","Haematological_event")
+ls_events <- c("AMI")
 print(ls_events)
 # ls_events <- ls_events[!ls_events %in% c("DIC", "TTP")]
 
@@ -259,7 +258,7 @@ ls_hrs <- pmap(list(ls_events_done, outcome_age_vac_combos$event, outcome_age_va
 df_hr <- rbindlist(ls_hrs, fill=TRUE)  %>% dplyr::select(!"V1")
 df_hr <- df_hr %>% dplyr::select(event, agegp, expo_week, events_total, events_M, events_F)
 
-write.csv(df_hr, file = file.path(res_dir, "event_count_AMI.csv") , row.names=F)
+write.csv(df_hr, file = file.path(res_dir, "event_count.csv") , row.names=F)
 
 
 

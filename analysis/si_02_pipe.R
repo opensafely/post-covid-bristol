@@ -5,14 +5,14 @@
 ## Author: Samantha Ip
 ## =============================================================================
 # specify events of interest
-ls_events <- c("artery_dissect","angina","other_DVT","fracture")
+ls_events <- c("AMI")
 #("fracture",unstable_angina","stroke_SAH_HS",)
 # Doesn't run: "TTP","DIC","ICVT_event","HF","portal_vein_thrombosis","cardiomyopathy"
 #All outcomes: "artery_dissect","angina","other_DVT","fracture","thrombocytopenia","life_arrhythmia","pericarditis","TTP","mesenteric_thrombus","DIC","myocarditis","stroke_TIA","stroke_isch","other_arterial_embolism","unstable_angina","PE","AMI","HF","portal_vein_thrombosis","cardiomyopathy","stroke_SAH_HS","Arterial_event","Venous_event","Haematological_event""DVT_event","ICVT_event"
 
 #"angina","other_DVT","fracture","thrombocytopenia","life_arrhythmia","pericarditis","TTP","mesenteric_thrombus","DIC","myocarditis","stroke_TIA","stroke_isch","other_arterial_embolism","unstable_angina","PE","AMI","HF","portal_vein_thrombosis","cardiomyopathy","stroke_SAH_HS","Arterial_event","Venous_event","Haematological_event","DVT_event","ICVT_event")
 # specify path to data
-master_df_fpath <- "~/CCU002_01/ccu002_01_cohort_all_outcomes_20210807.csv.gz"
+master_df_fpath <- "output/input.csv"
 
 # specify study parameters
 agebreaks <- c(0, 40, 60, 80, 500)

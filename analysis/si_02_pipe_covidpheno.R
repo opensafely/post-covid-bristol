@@ -11,7 +11,7 @@ ls_events <- c("AMI", "PE")
 # 20210716 -- any covidpheno
 # 20210720 -- covidpheno
 
-master_df_fpath <- "~/dars_nic_391419_j3w9t_collab/CCU002_01/ccu002_01_cohort_all_outcomes_20210804.csv.gz" 
+master_df_fpath <- "output/input.csv" 
 
 # specify study parameters
 agebreaks <- c(0, 40, 60, 80, 500)
