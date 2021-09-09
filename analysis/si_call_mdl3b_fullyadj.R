@@ -10,7 +10,7 @@ source(file.path(scripts_dir,"si_fit_model_reducedcovariates.R"))
 get_vacc_res <- function(sex_as_interaction, event, agegp, cohort_vac, covars){
   # read in event dates for outcome-of-interest
   outcomes <- fread(master_df_fpath, 
-                    select=c("NHS_NUMBER_DEID", 
+                    select=c("patient_id", 
                              paste0("out_", event)
                     ))
   # wrangle columns for naming convention 

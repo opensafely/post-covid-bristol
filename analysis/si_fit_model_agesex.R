@@ -22,7 +22,7 @@ fit_model_justweeks_age <- function(covars, vac_str, agebreaks, agelabels, agegp
   #===============================================================================
   # COXPH
   #-------------------------------------------------------------------------------
-  data_surv$cox_weights <- ifelse(data_surv$NHS_NUMBER_DEID %in% noncase_ids, 1/noncase_frac, 1)
+  data_surv$cox_weights <- ifelse(data_surv$patient_id %in% noncase_ids, 1/noncase_frac, 1)
   print("data_surv")
   print(head(data_surv))
 
@@ -31,7 +31,7 @@ fit_model_justweeks_age <- function(covars, vac_str, agebreaks, agelabels, agegp
     fml <- paste0(
       "Surv(tstart, tstop, event) ~ age + age_sq + ", 
       paste(interval_names, collapse="+"),
-      "+ cluster(NHS_NUMBER_DEID) + strata(region_name)")
+      "+ cluster(patient_id) + strata(region_name)")
     if (sex == "all"){
       fml<- paste(fml, "SEX", sep ="+")
     }

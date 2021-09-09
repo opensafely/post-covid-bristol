@@ -48,8 +48,8 @@ fit_get_data_surv <- function(covars, agegp, event, survival_data, cuts_weeks_si
                                          ((event_date <= DATE_OF_DEATH) | is.na(DATE_OF_DEATH)) 
                                        )) 
     
-    non_cases_exposed <- cohort_agegp %>% filter((!NHS_NUMBER_DEID %in% cases$NHS_NUMBER_DEID) & (!is.na(expo_date))) 
-    non_cases_unexposed <- cohort_agegp %>% filter((!NHS_NUMBER_DEID %in% cases$NHS_NUMBER_DEID) & (is.na(expo_date))) 
+    non_cases_exposed <- cohort_agegp %>% filter((!patient_id %in% cases$patient_id) & (!is.na(expo_date))) 
+    non_cases_unexposed <- cohort_agegp %>% filter((!patient_id %in% cases$patient_id) & (is.na(expo_date))) 
     non_cases_unexposed <- sample_frac(non_cases_unexposed, noncase_frac, replace=F)     
 
     cohort_agegp <- rbind(cases, non_cases_exposed, non_cases_unexposed)
@@ -66,14 +66,14 @@ fit_get_data_surv <- function(covars, agegp, event, survival_data, cuts_weeks_si
   # head(cohort_agegp %>% dplyr::select(!c("SEX", "AGE_AT_COHORT_START", "region_name", "name")) %>% filter(!is.na(DATE_VAC_CENSOR)))
   # head(cohort_agegp %>% dplyr::select(!c("SEX", "AGE_AT_COHORT_START", "region_name", "name")) %>% filter(DATE_VAC_CENSOR==end_date))
   
-  noncase_ids <- unique(non_cases_unexposed$NHS_NUMBER_DEID)
+  noncase_ids <- unique(non_cases_unexposed$patient_id)
   print("cohort_agegp done")
   head(cohort_agegp )
   #===============================================================================
   #   CACHE some features
   #-------------------------------------------------------------------------------  
-  df_sex <- cohort_agegp %>% dplyr::select(NHS_NUMBER_DEID, SEX)
-  df_age_region <- cohort_agegp %>% dplyr::select(NHS_NUMBER_DEID, AGE_AT_COHORT_START, region_name) %>% rename(age = AGE_AT_COHORT_START)
+  df_sex <- cohort_agegp %>% dplyr::select(patient_id, SEX)
+  df_age_region <- cohort_agegp %>% dplyr::select(patient_id, AGE_AT_COHORT_START, region_name) %>% rename(age = AGE_AT_COHORT_START)
   df_age_region$age_sq <- df_age_region$age^2
   
   
@@ -86,7 +86,7 @@ fit_get_data_surv <- function(covars, agegp, event, survival_data, cuts_weeks_si
   cohort_agegp %>% 
     filter(!is.na(expo_date)) -> with_expo
   with_expo %>% 
-    dplyr::select(NHS_NUMBER_DEID, expo_date, end_date, event_date, days_to_end, DATE_OF_DEATH) %>%  
+    dplyr::select(patient_id, expo_date, end_date, event_date, days_to_end, DATE_OF_DEATH) %>%  
     mutate(event_status = if_else( (!is.na(event_date)) 
                                      #  & (
                                      #   ((event_date <= end_date) & ((end_date != DATE_VAC_CENSOR) | is.na(DATE_VAC_CENSOR ))) | 
@@ -105,9 +105,9 @@ fit_get_data_surv <- function(covars, agegp, event, survival_data, cuts_weeks_si
   # CHUNK UP FOLLOW-UP PERIOD by CHANGE OF STATE OF EXPOSURE
   with_expo$day_expo <- as.numeric(with_expo$expo_date - as.Date(cohort_start_date))
   
-  d1 <- with_expo %>% dplyr::select(NHS_NUMBER_DEID, expo_date, event_date, DATE_OF_DEATH)
-  d2 <- with_expo %>% dplyr::select(NHS_NUMBER_DEID, day_expo, days_to_end, event_status)
-  with_expo <- tmerge(data1=d1, data2=d2, id=NHS_NUMBER_DEID,
+  d1 <- with_expo %>% dplyr::select(patient_id, expo_date, event_date, DATE_OF_DEATH)
+  d2 <- with_expo %>% dplyr::select(patient_id, day_expo, days_to_end, event_status)
+  with_expo <- tmerge(data1=d1, data2=d2, id=patient_id,
                       event=event(days_to_end, event_status),
                       expo=tdc(day_expo)) 
   with_expo <- with_expo %>% dplyr::select(!id)
@@ -136,7 +136,7 @@ fit_get_data_surv <- function(covars, agegp, event, survival_data, cuts_weeks_si
   rm(list=c("ls_with_expo", "with_expo_preexpo", "with_expo_postexpo"))
   
   with_expo  <- with_expo %>%
-    group_by(NHS_NUMBER_DEID) %>% arrange(weeks_cat) %>% mutate(last_step = ifelse(row_number()==n(),1,0))
+    group_by(patient_id) %>% arrange(weeks_cat) %>% mutate(last_step = ifelse(row_number()==n(),1,0))
   with_expo$event  <- with_expo$event * with_expo$last_step
   print("with_expo done")
   #===============================================================================
@@ -146,7 +146,7 @@ fit_get_data_surv <- function(covars, agegp, event, survival_data, cuts_weeks_si
     filter(is.na(expo_date)) -> without_expo
   
   without_expo %>% 
-    dplyr::select(NHS_NUMBER_DEID, expo_date, end_date, event_date, days_to_end, DATE_OF_DEATH) %>%  
+    dplyr::select(patient_id, expo_date, end_date, event_date, days_to_end, DATE_OF_DEATH) %>%  
     mutate(event = if_else( (!is.na(event_date)) 
                             # & 
                             #   (
@@ -200,8 +200,8 @@ fit_get_data_surv <- function(covars, agegp, event, survival_data, cuts_weeks_si
   }
   
   print("pivot wide done... examine data_surv for someone with exposure:")
-  data_surv %>% filter(tstart>0) %>% arrange(NHS_NUMBER_DEID)%>% head(10) %>% print(n = Inf)
-  data_surv %>% filter(expo_date==event_date) %>% arrange(NHS_NUMBER_DEID)%>% head(10) %>% print(n = Inf)
+  data_surv %>% filter(tstart>0) %>% arrange(patient_id)%>% head(10) %>% print(n = Inf)
+  data_surv %>% filter(expo_date==event_date) %>% arrange(patient_id)%>% head(10) %>% print(n = Inf)
   data_surv <- data_surv %>% left_join(df_sex)
   
   

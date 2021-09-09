@@ -26,7 +26,7 @@ fit_model_fullcovariates <- function(covars, vac_str, agebreaks, agelabels, ageg
   data_surv <- data_surv %>% mutate(SEX = factor(SEX))
 
   
-  data_surv$cox_weights <- ifelse(data_surv$NHS_NUMBER_DEID %in% noncase_ids, 1/noncase_frac, 1)
+  data_surv$cox_weights <- ifelse(data_surv$patient_id %in% noncase_ids, 1/noncase_frac, 1)
   gc()
   cat("... data_surv ... \n")
   print(data_surv)
@@ -36,7 +36,7 @@ fit_model_fullcovariates <- function(covars, vac_str, agebreaks, agelabels, ageg
                       "EVER_AMI", "EVER_DIAB_DIAG_OR_MEDS", "IMD", "LIPID_LOWER_MEDS", "smoking_status") 
   } # "ANTIPLATELET_MEDS" is spelled this way in the datatable...
   
-  covars_excl_region <- names(covars %>%  select_if(!(names(.) %in% c('NHS_NUMBER_DEID'))))
+  covars_excl_region <- names(covars %>%  select_if(!(names(.) %in% c('patient_id'))))
   
   coxfit_bkwdselection <- function(data_surv, sex, interval_names, fixed_covars, covars_excl_region, vac_str, event, agegp){
     covars_excl_region <- names(data_surv %>% 
@@ -48,7 +48,7 @@ fit_model_fullcovariates <- function(covars, vac_str, agebreaks, agelabels, ageg
       "Surv(tstart, tstop, event) ~ age + age_sq + ", 
       paste(interval_names, collapse="+"), "+",  
       paste(covars_excl_region, collapse="+"), 
-      "+ cluster(NHS_NUMBER_DEID) + rms::strat(region_name)")
+      "+ cluster(patient_id) + rms::strat(region_name)")
     
     if (sex == "all"){
       fml<- paste(fml, "SEX", sep="+")
@@ -72,7 +72,7 @@ fit_model_fullcovariates <- function(covars, vac_str, agebreaks, agelabels, ageg
     fml_red <- paste0(
       "Surv(tstart, tstop, event) ~ ", 
       paste(redcovariates_excl_region, collapse="+"), ## Identify covariates to be kept 
-      "+ cluster(NHS_NUMBER_DEID) + strata(region_name)")
+      "+ cluster(patient_id) + strata(region_name)")
     if (sex == "all"){
       fml_red<- paste(fml_red, "SEX", sep="+")
     }

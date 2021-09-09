@@ -8,17 +8,17 @@
 library(stringr)
 
 #----------------------- REPLACE " " with "_" for glht's linfct-----------------
-covars$cov_ethncity <- gsub(" ", "_", covars$cov_ethncity)
+covars$cov_ethnicity <- gsub(" ", "_", covars$cov_ethnicity)
 cohort_vac$region_name <- gsub(" ", "_", cohort_vac$region_name)
 
-print(unique(covars$cov_ethncity))
+print(unique(covars$cov_ethnicity))
 
 #---------------------------- REPLACE "" with "missing"------------------------------
-covars$cov_deprivation[covars$cov_deprivation == ""] <- "Missing"
+#covars$cov_deprivation[covars$cov_deprivation == ""] <- "Missing"
 
 #-------------------------------- FACTOR ---------------------------------------
-factor_covars <- names(covars %>% dplyr::select(! c("NHS_NUMBER_DEID", "cov_n_disorder", "cov_unique_bnf_chaps")))
-#factor_covars <- names(covars)[names(covars) != "NHS_NUMBER_DEID"]
+factor_covars <- names(covars %>% dplyr::select(! c("patient_id","cov_n_disorder"))) #,"cov_unique_bnf_chaps")))
+#factor_covars <- names(covars)[names(covars) != "patient_id"]
 
 mk_factor_orderlevels <- function(covars, colname)
   {
@@ -71,14 +71,14 @@ colnames(covars)[colSums(is.na(covars)) > 0]
 
 ##---------------------------- RELEVEL -----------------------------------------
 # The few factors that have specific  non-alphabetical reference levels
-covars$cov_ethncity <- relevel(covars$cov_ethncity, ref = "White")
-covars$cov_smoking_status <- relevel(covars$cov_smoking_status, ref = "Missing")
+covars$cov_ethnicity <- relevel(covars$cov_ethnicity, ref = 1) #"White")
+covars$cov_smoking_status <- relevel(covars$cov_smoking_status, ref = "")
 cohort_vac$region_name <- relevel(factor(cohort_vac$region_name), ref = "London")
 
 
 ##------------------------------- NUMERIC --------------------------------------
 # # The few covariates that should be numeric
-numeric_covars <- c("cov_unique_bnf_chaps", "cov_n_disorder")
+numeric_covars <- c("cov_n_disorder") #,"cov_unique_bnf_chaps")
 mk_numeric <- function(covars, colname)
 {
    covars <- covars %>% mutate(

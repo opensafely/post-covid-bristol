@@ -12,7 +12,7 @@ ls_events <- c("AMI")
 
 get_vacc_res <- function(event, vac_str, agegp, cohort_vac, agebreaks, agelabels, covars, cuts_weeks_since_expo, master_df_fpath, cohort_start_date, cohort_end_date, noncase_frac=0.1){
   outcomes <- fread(master_df_fpath, 
-                    select=c("NHS_NUMBER_DEID", 
+                    select=c("patient_id", 
                              paste0(event, "_date")
                     ))
   outcomes$name <- event

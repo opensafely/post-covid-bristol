@@ -34,9 +34,9 @@ gc()
 # specify model 
 mdl <- "mdl3b_fullyadj" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
 # specify results directory -- I use res_dir
-res_dir_proj <- "output/"
+res_dir_proj <- "output"
 # specify path to scripts' directory
-scripts_dir <- "analysis/"
+scripts_dir <- "analysis"
 
 # specify model parameters, data source, outcomes of interest, read in relevant data, get prepped covariates
 source(file.path(scripts_dir, "si_02_pipe.R"))
@@ -68,8 +68,9 @@ if (mdl == "mdl1_unadj"){
   res_dir <- file.path(res_dir_proj, "fully_adj_anydiag")
   source(file.path(scripts_dir,"si_call_mdl3b_fullyadj.R"))
 }# creates if does not exist and sets working directory
-#dir.create(file.path(res_dir), recursive =TRUE)
-setwd(file.path(res_dir))
+
+dir.create(file.path(res_dir), recursive =TRUE, showWarnings = FALSE)
+#setwd(file.path(res_dir))
 
 
 
@@ -134,9 +135,6 @@ if (mdl == "mdl4_fullinteract_suppl34"){
   }
   }
 
-
-
-ls_events_missing %>% View()
 # ls_events_missing <- ls_events_missing %>% filter(! event %in% c("death"))
 
 

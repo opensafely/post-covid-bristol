@@ -51,14 +51,14 @@ fit_model_interactions <- function(interacting_feat, data_surv, covars, noncase_
   data_surv <- data_surv %>% mutate(SEX = factor(SEX))
   
   
-  data_surv$cox_weights <- ifelse(data_surv$NHS_NUMBER_DEID %in% noncase_ids, 1/noncase_frac, 1)
+  data_surv$cox_weights <- ifelse(data_surv$patient_id %in% noncase_ids, 1/noncase_frac, 1)
   
   
   cat("... data_surv ... \n")
   print(data_surv)
   gc()
   
-  covars_excl_region <- names(covars %>%  select_if(!(names(.) %in% c('NHS_NUMBER_DEID'))))
+  covars_excl_region <- names(covars %>%  select_if(!(names(.) %in% c('patient_id'))))
   
   cat("...... start coxfit ...... \n")
   coxfit(data_surv, interval_names, covars_excl_region, vac_str, event, interacting_feat)
@@ -103,7 +103,7 @@ coxfit <- function(data_surv, interval_names, covars_excl_region, vac_str, event
   #   "Surv(tstart, tstop, event) ~ SEX + ", 
   #   paste(apply(expand.grid(interval_names, levels(data_surv$SEX)), 1, paste, collapse="_"), collapse = "+"),
   #   # "+", paste(redcovariates_excl_region, collapse="+"), ## Identify covariates to be kept
-  #   "+ cluster(NHS_NUMBER_DEID) + strata(region_name)")
+  #   "+ cluster(patient_id) + strata(region_name)")
   
   #---------------------------------  * --------------------------------------
   if (interacting_feat == "age_deci"){
@@ -126,7 +126,7 @@ coxfit <- function(data_surv, interval_names, covars_excl_region, vac_str, event
     # "Surv(tstart, tstop, event) ~ week1_4*", interacting_feat, "+ week5_39*", interacting_feat,
     "Surv(tstart, tstop, event) ~ week1_4 + week5_39 + ", interacting_feat, "+ week1_4:", interacting_feat, "+ week5_39:", interacting_feat,
     "+", paste(redcovariates_excl_region, collapse="+"), ## Identify covariates to be kept
-    "+ cluster(NHS_NUMBER_DEID) + strata(region_name) + SEX")
+    "+ cluster(patient_id) + strata(region_name) + SEX")
   print(fml_ref_wald)
   system.time(fit_ref_wald <- coxph(
     formula = as.formula(fml_ref_wald), 
@@ -169,7 +169,7 @@ coxfit <- function(data_surv, interval_names, covars_excl_region, vac_str, event
   fml_week1_4_wald <- paste0(
     "Surv(tstart, tstop, event) ~ week1_4 + week5_39 + ", interacting_feat, "+ week5_39:", interacting_feat,
     "+", paste(redcovariates_excl_region, collapse="+"), ## Identify covariates to be kept
-    "+ cluster(NHS_NUMBER_DEID) + strata(region_name) + SEX")
+    "+ cluster(patient_id) + strata(region_name) + SEX")
   print(fml_week1_4_wald)
   system.time(fit_week1_4_wald <- coxph(
     formula = as.formula(fml_week1_4_wald), 
@@ -182,7 +182,7 @@ coxfit <- function(data_surv, interval_names, covars_excl_region, vac_str, event
   fml_week5_39_wald <- paste0(
     "Surv(tstart, tstop, event) ~ week1_4 + week5_39 + ", interacting_feat, "+ week1_4:", interacting_feat, 
     "+", paste(redcovariates_excl_region, collapse="+"), ## Identify covariates to be kept
-    "+ cluster(NHS_NUMBER_DEID) + strata(region_name) + SEX")
+    "+ cluster(patient_id) + strata(region_name) + SEX")
   print(fml_week5_39_wald)
   system.time(fit_week5_39_wald <- coxph(
     formula = as.formula(fml_week5_39_wald), 

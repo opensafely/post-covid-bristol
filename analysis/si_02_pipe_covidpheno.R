@@ -5,7 +5,7 @@
 ## Author: Samantha Ip
 ## =============================================================================
 # specify events of interest
-ls_events <- c("AMI", "PE")
+ls_events <- c("AMI")
 
 # specify path to data
 # 20210716 -- any covidpheno
@@ -38,16 +38,23 @@ sort(names(master_names))
 #===============================================================================
 #  READ IN DATA
 #-------------------------------------------------------------------------------
-cohort_vac_cols <- c("NHS_NUMBER_DEID", 
+cohort_vac_cols <- c("patient_id", 
                      "cov_sex", 
                      "death_date", 
                      "cov_age", 
                      "exp_confirmed_covid19_date",
-                     "exp_confirmed_covid_phenotype", 
+                     "hospital_covid19_date", 
                      "cov_region")
 
 cohort_vac <- fread(master_df_fpath, 
                     select=cohort_vac_cols)
+
+cohort_vac$exp_confirmed_covid_phenotype <- ifelse(!is.na(cohort_vac$hospital_covid19_date) & !is.na(cohort_vac$exp_confirmed_covid19_date), 
+                                                   "hospitalised",
+                                                   ifelse(is.na(cohort_vac$hospital_covid19_date) & !is.na(cohort_vac$exp_confirmed_covid19_date), 
+                                                          "non_hospitalised",""))
+
+cohort_vac$hospital_covid19_date <- NULL
 
 setnames(cohort_vac, 
          old = c("death_date",  
@@ -67,18 +74,12 @@ print(head(cohort_vac))
 gc()
 
 if (! mdl %in% c("mdl1_unadj", "mdl2_agesex")){
-  covar_names <- master_names %>% dplyr::select(!c(all_of(cohort_vac_cols[cohort_vac_cols != "NHS_NUMBER_DEID"]), 
-                                                   "CHUNK",
-                                                   names(master_names)[grepl("^out_", names(master_names))]
-  )) %>% names()
-  
+  covar_names <- c(names(master_names)[grepl("cov_", names(master_names))],"patient_id")
   covars <- fread(master_df_fpath, select = covar_names)
   gc()
-  
-  # wrangles covariates to the correct data types, deal with NAs and missing values, set reference levels
-  source(file.path(scripts_dir, "si_prep_covariates.R"))
+  source(file.path(scripts_dir, "si_prep_covariates.R")) # wrangles covariates to the correct data types, deal with NAs and missing values, set reference levels
 } else {
-  covars <- cohort_vac %>% dplyr::select(NHS_NUMBER_DEID)
+  covars <- cohort_vac %>% dplyr::select(patient_id)
 }
 
 

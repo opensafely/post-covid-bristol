@@ -34,7 +34,7 @@ coxfit_bkwdselection <- function(data_surv, sex, interval_names, fixed_covars, p
     fml_red <- paste0(
       "Surv(tstart, tstop, event) ~ week*SEX",
       "+", paste(redcovariates_excl_region, collapse="+"), 
-      "+ region_name + cluster(NHS_NUMBER_DEID)")
+      "+ region_name + cluster(patient_id)")
   } else {
     cat("...... sex as additive ...... \n")
     redcovariates_excl_region <- unique(c("age", "age_sq", interval_names, AMI_bkwdselected_covars, fixed_covars))
@@ -43,8 +43,8 @@ coxfit_bkwdselection <- function(data_surv, sex, interval_names, fixed_covars, p
     fml_red <- paste0(
       "Surv(tstart, tstop, event) ~ ",
       paste(redcovariates_excl_region, collapse="+"), 
-      "+ region_name + cluster(NHS_NUMBER_DEID)")
-      # "+ cluster(NHS_NUMBER_DEID) + strata(region_name)")
+      "+ region_name + cluster(patient_id)")
+      # "+ cluster(patient_id) + strata(region_name)")
     if ((sex == "all") & (!"SEX" %in% redcovariates_excl_region)){
       fml_red <- paste(fml_red, "SEX", sep="+")
     }
@@ -88,11 +88,11 @@ fit_model_reducedcovariates <- function(sex_as_interaction, covars, pheno_str, a
     ind_any_zeroeventperiod <- list_data_surv_noncase_ids_interval_names[[4]]
   }
   
-  covar_names <- names(covars)[ names(covars) != "NHS_NUMBER_DEID"]
+  covar_names <- names(covars)[ names(covars) != "patient_id"]
   
   data_surv <- data_surv %>% left_join(covars)
   data_surv <- data_surv %>% mutate(SEX = factor(SEX))
-  data_surv$cox_weights <- ifelse(data_surv$NHS_NUMBER_DEID %in% noncase_ids, 1/noncase_frac, 1)
+  data_surv$cox_weights <- ifelse(data_surv$patient_id %in% noncase_ids, 1/noncase_frac, 1)
 
   cat("... data_surv ... \n")
   print(data_surv)
