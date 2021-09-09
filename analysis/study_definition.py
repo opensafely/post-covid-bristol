@@ -133,7 +133,7 @@ study = StudyDefinition(
     ###
     # Used to support combined death_date variable.
     # Ideally would be contained within minimum_of()
-    out_ami_snomed=patients.with_these_clinical_events(
+    ami_snomed=patients.with_these_clinical_events(
         ami_snomed_clinical,
         returning="date",
         on_or_after="index_date",
@@ -145,7 +145,7 @@ study = StudyDefinition(
             "incidence": 0.03,
         },
     ),
-    out_ami_icd10=patients.admitted_to_hospital(
+    ami_icd10=patients.admitted_to_hospital(
         returning="date_admitted",
         with_these_diagnoses=ami_icd10,
         on_or_after="index_date",
@@ -157,8 +157,8 @@ study = StudyDefinition(
             "incidence": 0.03,
         },
     ),
-    out_ami=patients.minimum_of(
-        "out_ami_snomed", "out_ami_icd10"
+    out_AMI=patients.minimum_of(
+        "ami_snomed", "ami_icd10"
     ),
     ###
     cov_sex=patients.sex(
