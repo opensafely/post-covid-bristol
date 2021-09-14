@@ -50,25 +50,24 @@ variables = {
 covariates = {k: get_codelist_variable(v) for k, v in variables.items()}
 
 study = StudyDefinition(
-    # placeholder index date
+    # Placeholder index date
     index_date="2020-01-01",
     default_expectations={
         "date": {"earliest": "1900-01-01", "latest": "today"},
         "rate": "uniform",
         "incidence": 0.5,
     },
+    # Require practice registration for a year prior to index date
     population=patients.registered_with_one_practice_between(
-        "2019-01-01", "2020-01-01"
+        "index_date - 1 year", "index_date"
     ),
-    ###
-    # Used to support combined death_date variable.
-    # Ideally would be contained within minimum_of()
+    # Record death date
     primary_care_death_date=patients.with_death_recorded_in_primary_care(
         on_or_after="index_date",
         returning="date_of_death",
         date_format="YYYY-MM-DD",
         return_expectations={
-            "date": {"earliest": "index_date"},
+            "date": {"earliest": "index_date", "latest" : "today"},
             "rate": "exponential_increase",
         },
     ),
@@ -81,21 +80,15 @@ study = StudyDefinition(
             "rate": "exponential_increase",
         },
     ),
-    ###
     death_date=patients.minimum_of(
         "primary_care_death_date", "ons_died_from_any_cause_date"
     ),
-    ###
-    # Used to support combined covid19_date variable.
-    # Ideally would be contained within minimum_of()
-    primary_care_covid19_date=patients.with_these_clinical_events(
-        combine_codelists(
-            covid_primary_care_code,
-            covid_primary_care_positive_test,
-            covid_primary_care_sequalae,
-        ),
+    # Record COVID-19 infection date
+    sgss_covid19_date=patients.with_test_result_in_sgss(
+        pathogen="SARS-CoV-2",
+        test_result="positive",
         returning="date",
-        find_last_match_in_period=True,
+        find_first_match_in_period=True,
         date_format="YYYY-MM-DD",
         on_or_after="index_date",
         return_expectations={
@@ -103,10 +96,26 @@ study = StudyDefinition(
             "rate": "uniform",
             "incidence": 0.05,
         },
+    )
+    primary_care_covid19_date=patients.with_these_clinical_events(
+        combine_codelists(
+            covid_primary_care_code,
+            covid_primary_care_positive_test,
+            covid_primary_care_sequalae,
+        ),
+        returning="date",
+        on_or_after="index_date",
+        date_format="YYYY-MM-DD",
+        find_first_match_in_period=True,
+        return_expectations={
+            "date": {"earliest": "index_date", "latest" : "today"},
+            "rate": "uniform",
+            "incidence": 0.05,
+        },
     ),
     hospital_covid19_date=patients.admitted_to_hospital(
-        returning="date_admitted",
         with_these_diagnoses=covid_codes,
+        returning="date_admitted",
         on_or_after="index_date",
         date_format="YYYY-MM-DD",
         find_first_match_in_period=True,
@@ -119,20 +128,19 @@ study = StudyDefinition(
     death_covid19_date=patients.with_these_codes_on_death_certificate(
         covid_codes,
         returning="date_of_death",
+        on_or_after="index_date",
         date_format="YYYY-MM-DD",
+        find_first_match_in_period=True,
         return_expectations={
             "date": {"earliest": "index_date", "latest" : "today"},
             "rate": "uniform",
             "incidence": 0.02
         },
     ),
-    ###
     exp_confirmed_covid19_date=patients.minimum_of(
-        "primary_care_covid19_date","hospital_covid19_date","death_covid19_date"
+        "sgss_covid19_date","primary_care_covid19_date","hospital_covid19_date","death_covid19_date"
     ),
-    ###
-    # Used to support combined death_date variable.
-    # Ideally would be contained within minimum_of()
+    # Record acute myocardial infarction date
     ami_snomed=patients.with_these_clinical_events(
         ami_snomed_clinical,
         returning="date",
@@ -160,7 +168,7 @@ study = StudyDefinition(
     out_AMI=patients.minimum_of(
         "ami_snomed", "ami_icd10"
     ),
-    ###
+    # Covariates
     cov_sex=patients.sex(
         return_expectations={
             "rate": "universal",
