@@ -96,7 +96,7 @@ study = StudyDefinition(
             "rate": "uniform",
             "incidence": 0.05,
         },
-    )
+    ),
     primary_care_covid19_date=patients.with_these_clinical_events(
         combine_codelists(
             covid_primary_care_code,
@@ -130,7 +130,6 @@ study = StudyDefinition(
         returning="date_of_death",
         on_or_after="index_date",
         date_format="YYYY-MM-DD",
-        find_first_match_in_period=True,
         return_expectations={
             "date": {"earliest": "index_date", "latest" : "today"},
             "rate": "uniform",
