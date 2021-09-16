@@ -16,7 +16,7 @@ master_df_fpath <- "output/input.csv"
 
 # specify study parameters
 agebreaks <- c(0, 40, 60, 80, 500)
-agelabels <- c("<40", "40-59", "60-79", ">=80")
+agelabels <- c("under_40", "40-59", "60-79", "over_80")
 noncase_frac <- 0.1
 
 
@@ -60,11 +60,19 @@ setnames(cohort_vac,
                  "EXPO_DATE", 
                  "region_name"))
 
+cohort_vac$DATE_OF_DEATH=na_if(cohort_vac$DATE_OF_DEATH,"")
+cohort_vac$DATE_OF_DEATH=as.Date(cohort_vac$DATE_OF_DEATH)
+cohort_vac$EXPO_DATE=na_if(cohort_vac$EXPO_DATE,"")
+cohort_vac$EXPO_DATE=as.Date(cohort_vac$EXPO_DATE)
+
+
 print(head(cohort_vac))
 gc()
 
+
 if (! mdl %in% c("mdl1_unadj", "mdl2_agesex")){
-  covar_names <- c(names(master_names)[grepl("cov_", names(master_names))],"patient_id")
+  covar_names <- master_names %>% dplyr::select(c(names(master_names)[grepl("cov_", names(master_names))],"patient_id")) %>% names()
+  covar_names=covar_names[! covar_names %in% c('cov_sex','cov_age','cov_region')]
   covars <- fread(master_df_fpath, select = covar_names)
   gc()
   source(file.path(scripts_dir, "si_prep_covariates.R")) # wrangles covariates to the correct data types, deal with NAs and missing values, set reference levels

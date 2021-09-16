@@ -123,8 +123,8 @@ fit_model_reducedcovariates <- function(sex_as_interaction, covars, agegp, event
   } else {
     # ------------------------------  + sex  -----------------------------------
     fit_sexall <- coxfit_bkwdselection(data_surv, "all", interval_names, fixed_covars, event, agegp, sex_as_interaction, covar_names)
-    fit_sex1 <- coxfit_bkwdselection(data_surv %>% filter(SEX==1), "1", interval_names, fixed_covars, event, agegp, sex_as_interaction, covar_names)
-    fit_sex2 <- coxfit_bkwdselection(data_surv %>% filter(SEX==2), "2", interval_names, fixed_covars, event, agegp, sex_as_interaction, covar_names)
+    fit_sex1 <- coxfit_bkwdselection(data_surv %>% filter(SEX=='M'), "1", interval_names, fixed_covars, event, agegp, sex_as_interaction, covar_names)
+    fit_sex2 <- coxfit_bkwdselection(data_surv %>% filter(SEX=='F'), "2", interval_names, fixed_covars, event, agegp, sex_as_interaction, covar_names)
     fit <- rbindlist(list(fit_sexall, fit_sex1, fit_sex2))
   }
 
@@ -136,7 +136,7 @@ fit_model_reducedcovariates <- function(sex_as_interaction, covars, agegp, event
   print(fit)
   
   
-  write.csv(fit, paste0("tbl_hr_" , expo, "_", event, "_", agegp, ".csv"), row.names = T)
+  write.csv(fit, paste0(res_dir,"/tbl_hr_" , expo, "_", event, "_", agegp, ".csv"), row.names = T)
 
   
   gc()

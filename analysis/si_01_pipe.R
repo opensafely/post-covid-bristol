@@ -32,7 +32,7 @@ rm(list=setdiff(ls(), c("con")))
 gc()
 
 # specify model 
-mdl <- "mdl3b_fullyadj" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
+mdl <- "mdl2_agesex" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
 # specify results directory -- I use res_dir
 res_dir_proj <- "output"
 # specify path to scripts' directory
@@ -135,7 +135,7 @@ if (mdl == "mdl4_fullinteract_suppl34"){
   }
   }
 
-# ls_events_missing <- ls_events_missing %>% filter(! event %in% c("death"))
+#ls_events_missing <- ls_events_missing %>% filter(! event %in% c("death"))
 
 
 # ------------------------------------ LAUNCH JOBS -----------------------------
@@ -152,8 +152,8 @@ if (mdl == "mdl4_fullinteract_suppl34"){
                      cohort_start_date, cohort_end_date, noncase_frac=0.1))
   
 } else if (mdl %in% c("mdl3b_fullyadj", "mdl5_anydiag_death28days")) {
-   mclapply(split(ls_events_missing,seq(nrow(ls_events_missing))), mc.cores = 2,
-   #lapply(split(ls_events_missing,seq(nrow(ls_events_missing))),
+   #mclapply(split(ls_events_missing,seq(nrow(ls_events_missing))), mc.cores = 2,
+   lapply(split(ls_events_missing,seq(nrow(ls_events_missing))),
            function(ls_events_missing) 
              get_vacc_res(
                sex_as_interaction=FALSE,
@@ -162,8 +162,8 @@ if (mdl == "mdl4_fullinteract_suppl34"){
                cohort_vac, covars)
            )
 } else if(mdl %in% c("mdl1_unadj", "mdl2_agesex")){
-  mclapply(split(ls_events_missing,seq(nrow(ls_events_missing))), mc.cores = 2,
-    # lapply(split(ls_events_missing,seq(nrow(ls_events_missing))),
+  #mclapply(split(ls_events_missing,seq(nrow(ls_events_missing))), mc.cores = 2,
+  lapply(split(ls_events_missing,seq(nrow(ls_events_missing))),
            function(ls_events_missing) 
              get_vacc_res(
                sex_as_interaction=FALSE,
@@ -174,3 +174,8 @@ if (mdl == "mdl4_fullinteract_suppl34"){
 } else if (mdl == "mdl3a_bkwdselect"){
   print("...... lapply completed ......")
 }
+
+
+#Combine all age groups results into one .csv
+source(file.path(scripts_dir, "si_fmt_tbls_R_HRs.R"))
+

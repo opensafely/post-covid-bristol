@@ -21,7 +21,8 @@ get_vacc_res <- function(sex_as_interaction, event, agegp, cohort_vac, covars){
   
   
   survival_data <- cohort_vac %>% left_join(outcomes)
-  
+  survival_data$record_date=na_if(survival_data$record_date,"")
+  survival_data$record_date=as.Date(survival_data$record_date)
   
   schema <- sapply(survival_data, is.Date)
   for (colname in names(schema)[schema==TRUE]){

@@ -4,123 +4,125 @@
 ## Author: Samantha Ip
 ## =============================================================================
 
-library(data.table)
-library(dplyr)
-library(survival)
-library(table1)
-library(broom)
-library(DBI)
-library(ggplot2)
-library(nlme)
-library(tidyverse)
-library(R.utils)
-library(lubridate)
-library(purrr)
-library(parallel)
+#library(data.table)
+#library(dplyr)
+#library(survival)
+#library(table1)
+#library(broom)
+#library(DBI)
+#library(ggplot2)
+#library(nlme)
+#library(tidyverse)
+#library(R.utils)
+#library(lubridate)
+#library(purrr)
+#library(parallel)
 
 detectCores()
-rm(list=ls())
+#rm(list=ls())
+rm(list=setdiff(ls(), c("mdl","res_dir_proj","scripts_dir","ls_events","agelabels")))
+
 
 #========================== HRs phenotypes ===============================
-res_dir_proj <- "output"
-res_dir_date <- "covidpheno"
-mdl <- "mdl3b_fullyadj" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
-data_version <- "death28days" # death28days, anydiag
+#res_dir_proj <- "output"
+# res_dir_date <- "covidpheno"
+# mdl <- "mdl3b_fullyadj" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
+# data_version <- "death28days" # death28days, anydiag
 
-if (mdl == "mdl1_unadj"){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "unadj_nosexforcombined")
-} else if (mdl == "mdl2_agesex"){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "adj_age_sex_only")
-} else if (mdl == "mdl3a_bkwdselect"){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_bkwdselect")
-} else if (mdl == "mdl3b_fullyadj"){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_bkwdselect")
-} else if (mdl == "mdl4_fullinteract_suppl34"){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "interactionterm")
-} else if ((mdl == "mdl5_anydiag_death28days") & (data_version == "death28days")){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_death28days")
-} else if ((mdl == "mdl5_anydiag_death28days") & (data_version == "anydiag")){
-  res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_anydiag")
-}
-setwd(file.path(res_dir))
-
-
-
-ls_events <- c("AMI")
-print(ls_events)
-# ls_events <- ls_events[!ls_events %in% c("DIC", "TTP")]
-
-agelabels <- c("<40", "40-59", "60-79", ">=80")
-
-
-outcome_age_vac_combos <- expand.grid(ls_events, agelabels, c("hospitalised", "non_hospitalised"))
-# outcome_age_vac_combos <- expand.grid(ls_events, agelabels, c("vac_az", "vac_pf", "vac_all"))
-names(outcome_age_vac_combos) <- c("event", "agegp", "covidpheno")
-
-
-ls_hrs <- pmap(list(outcome_age_vac_combos$event, outcome_age_vac_combos$agegp, outcome_age_vac_combos$covidpheno),
-               function(event, agegp, covidpheno)
-                 file.path(res_dir,
-                        paste0("tbl_hr_INFECTION_",
-                        event, "_",
-                        agegp, "_",
-                        covidpheno, ".csv")
-                 )
-)
-ls_should_have <- unlist(ls_hrs)
-
-ls_events_missing <- data.frame()
-ls_events_done <- c()
-for (i in 1:nrow(outcome_age_vac_combos)) {
-  row <- outcome_age_vac_combos[i,]
-  fpath <- file.path(res_dir,
-                  paste0("tbl_hr_INFECTION_",
-                  row$event, "_",
-                  row$agegp, "_",
-                  row$covidpheno, ".csv"))
-
-  if (!file.exists(fpath)) {
-    ls_events_missing <- rbind(ls_events_missing, row)
-  } else {
-    ls_events_done <- c(ls_events_done, fpath)
-  }
-}
-
-# which ones are missing?
-ls_events_missing %>% View()
-print(ls_events_missing)
-
-#  fread completed ones
-# ls_hrs <- lapply(ls_events_done, fread)
-
-outcome_age_vac_combos <- anti_join(outcome_age_vac_combos, ls_events_missing)
-
-
-ls_hrs <- pmap(list(ls_events_done, outcome_age_vac_combos$covidpheno), 
-               function(fpath, covidpheno){ 
-                 df <- fread(fpath) 
-                 df$covidpheno <- covidpheno
-                 return(df)
-               })
-
-
-
-df_hr <- rbindlist(ls_hrs, fill=TRUE)
-df_hr <- df_hr %>% mutate_if(is.numeric, round, digits=5) %>% dplyr::select("event", "covidpheno", "agegp", "sex",
-                                                                    "term", "estimate", "conf.low", "conf.high", "p.value", "std.error", "robust.se",
-                                                                    "statistic"
-)
-df_hr
-
-df_hr <- df_hr %>% filter(sex=="all")
-
-write.csv(df_hr, file = file.path(res_dir, "hrs_vac.csv") , row.names=F)
+# if (mdl == "mdl1_unadj"){
+#   res_dir <- file.path(res_dir_proj, res_dir_date, "unadj_nosexforcombined")
+# } else if (mdl == "mdl2_agesex"){
+#   res_dir <- file.path(res_dir_proj, res_dir_date, "adj_age_sex_only")
+# } else if (mdl == "mdl3a_bkwdselect"){
+#   res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_bkwdselect")
+# } else if (mdl == "mdl3b_fullyadj"){
+#   res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_bkwdselect")
+# } else if (mdl == "mdl4_fullinteract_suppl34"){
+#   res_dir <- file.path(res_dir_proj, res_dir_date, "interactionterm")
+# } else if ((mdl == "mdl5_anydiag_death28days") & (data_version == "death28days")){
+#   res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_death28days")
+# } else if ((mdl == "mdl5_anydiag_death28days") & (data_version == "anydiag")){
+#   res_dir <- file.path(res_dir_proj, res_dir_date, "fully_adj_anydiag")
+# }
+# setwd(file.path(res_dir))
+# 
+# 
+# 
+# ls_events <- c("AMI")
+# print(ls_events)
+# # ls_events <- ls_events[!ls_events %in% c("DIC", "TTP")]
+# 
+# agelabels <- c("<40", "40-59", "60-79", ">=80")
+# 
+# 
+# outcome_age_vac_combos <- expand.grid(ls_events, agelabels, c("hospitalised", "non_hospitalised"))
+# # outcome_age_vac_combos <- expand.grid(ls_events, agelabels, c("vac_az", "vac_pf", "vac_all"))
+# names(outcome_age_vac_combos) <- c("event", "agegp", "covidpheno")
+# 
+# 
+# ls_hrs <- pmap(list(outcome_age_vac_combos$event, outcome_age_vac_combos$agegp, outcome_age_vac_combos$covidpheno),
+#                function(event, agegp, covidpheno)
+#                  file.path(res_dir,
+#                         paste0("tbl_hr_INFECTION_",
+#                         event, "_",
+#                         agegp, "_",
+#                         covidpheno, ".csv")
+#                  )
+# )
+# ls_should_have <- unlist(ls_hrs)
+# 
+# ls_events_missing <- data.frame()
+# ls_events_done <- c()
+# for (i in 1:nrow(outcome_age_vac_combos)) {
+#   row <- outcome_age_vac_combos[i,]
+#   fpath <- file.path(res_dir,
+#                   paste0("tbl_hr_INFECTION_",
+#                   row$event, "_",
+#                   row$agegp, "_",
+#                   row$covidpheno, ".csv"))
+# 
+#   if (!file.exists(fpath)) {
+#     ls_events_missing <- rbind(ls_events_missing, row)
+#   } else {
+#     ls_events_done <- c(ls_events_done, fpath)
+#   }
+# }
+# 
+# # which ones are missing?
+# ls_events_missing %>% View()
+# print(ls_events_missing)
+# 
+# #  fread completed ones
+# # ls_hrs <- lapply(ls_events_done, fread)
+# 
+# outcome_age_vac_combos <- anti_join(outcome_age_vac_combos, ls_events_missing)
+# 
+# 
+# ls_hrs <- pmap(list(ls_events_done, outcome_age_vac_combos$covidpheno), 
+#                function(fpath, covidpheno){ 
+#                  df <- fread(fpath) 
+#                  df$covidpheno <- covidpheno
+#                  return(df)
+#                })
+# 
+# 
+# 
+# df_hr <- rbindlist(ls_hrs, fill=TRUE)
+# df_hr <- df_hr %>% mutate_if(is.numeric, round, digits=5) %>% dplyr::select("event", "covidpheno", "agegp", "sex",
+#                                                                     "term", "estimate", "conf.low", "conf.high", "p.value", "std.error", "robust.se",
+#                                                                     "statistic"
+# )
+# df_hr
+# 
+# df_hr <- df_hr %>% filter(sex=="all")
+# 
+# write.csv(df_hr, file = file.path(res_dir, "hrs_vac.csv") , row.names=F)
 
 
 #========================== HRs no pheno ===============================
-res_dir_proj <- "output"
-mdl <- "mdl3b_fullyadj" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
-data_version <- "death28days" # death28days, anydiag
+#res_dir_proj <- "output"
+#mdl <- "mdl3b_fullyadj" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
+#data_version <- "death28days" # death28days, anydiag
 
 if (mdl == "mdl1_unadj"){
   res_dir <- file.path(res_dir_proj, "unadj_nosexforcombined")
@@ -137,15 +139,15 @@ if (mdl == "mdl1_unadj"){
 } else if ((mdl == "mdl5_anydiag_death28days") & (data_version == "anydiag")){
   res_dir <- file.path(res_dir_proj, "fully_adj_anydiag")
 }
-setwd(file.path(res_dir))
+#setwd(file.path(res_dir))
 
 
 
-ls_events <- c("AMI")
-print(ls_events)
+#ls_events <- c("AMI")
+#print(ls_events)
 # ls_events <- ls_events[!ls_events %in% c("DIC", "TTP")]
 
-agelabels <- c("<40", "40-59", "60-79", ">=80")
+#agelabels <- c("<40", "40-59", "60-79", ">=80")
 
 
 outcome_age_vac_combos <- expand.grid(ls_events, agelabels)
@@ -180,13 +182,17 @@ for (i in 1:nrow(outcome_age_vac_combos)) {
 }
 
 # which ones are missing?
-ls_events_missing %>% View()
-print(ls_events_missing)
+#ls_events_missing %>% View()
+#print(ls_events_missing)
 
 #  fread completed ones
 # ls_hrs <- lapply(ls_events_done, fread)
 
-outcome_age_vac_combos <- anti_join(outcome_age_vac_combos, ls_events_missing)
+
+if(length(ls_events_missing)>0){
+  outcome_age_vac_combos <- anti_join(outcome_age_vac_combos, ls_events_missing)
+}
+#outcome_age_vac_combos <- anti_join(outcome_age_vac_combos, ls_events_missing, by=NULL)
 
 
 ls_hrs <- pmap(list(ls_events_done), 
@@ -202,13 +208,11 @@ df_hr <- df_hr %>% mutate_if(is.numeric, round, digits=5) %>% dplyr::select("eve
                                                                             "term", "estimate", "conf.low", "conf.high", "p.value", "std.error", "robust.se",
                                                                             "statistic"
 )
-df_hr
+
 
 df_hr <- df_hr %>% filter(sex=="all")
 
-write.csv(df_hr, file = file.path(res_dir, "hrs_vac.csv") , row.names=F)
-
-
+write.csv(df_hr, paste0(res_dir,"/hrs_vac_" , mdl, ".csv"), row.names = F)
 
 
 
@@ -242,7 +246,7 @@ for (i in 1:nrow(outcome_age_vac_combos)) {
 }
 
 # which ones are missing?
-print(ls_events_missing)
+#print(ls_events_missing)
 
 #  fread completed ones
 ls_hrs <- pmap(list(ls_events_done, outcome_age_vac_combos$event, outcome_age_vac_combos$agegp), 
@@ -258,7 +262,7 @@ ls_hrs <- pmap(list(ls_events_done, outcome_age_vac_combos$event, outcome_age_va
 df_hr <- rbindlist(ls_hrs, fill=TRUE)  %>% dplyr::select(!"V1")
 df_hr <- df_hr %>% dplyr::select(event, agegp, expo_week, events_total, events_M, events_F)
 
-write.csv(df_hr, file = file.path(res_dir, "event_count.csv") , row.names=F)
+write.csv(df_hr, paste0(res_dir,"/event_count_" , mdl, ".csv") , row.names=F)
 
 
 

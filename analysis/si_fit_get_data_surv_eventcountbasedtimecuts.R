@@ -223,8 +223,8 @@ fit_get_data_surv <- function(covars, agegp, event, survival_data, cuts_weeks_si
     return(tbl_event_count)
   }
   tbl_event_count_all <- get_tbl_event_count(data_surv, interval_names)
-  tbl_event_count_sex1 <- get_tbl_event_count(data_surv %>% filter(SEX==1), interval_names)
-  tbl_event_count_sex2 <- get_tbl_event_count(data_surv %>% filter(SEX==2), interval_names)
+  tbl_event_count_sex1 <- get_tbl_event_count(data_surv %>% filter(SEX=='M'), interval_names)
+  tbl_event_count_sex2 <- get_tbl_event_count(data_surv %>% filter(SEX=='F'), interval_names)
   
   tbl_event_count <- list(tbl_event_count_all, tbl_event_count_sex1, tbl_event_count_sex2) %>% reduce(left_join, by = "expo_week")
   
@@ -245,12 +245,18 @@ fit_get_data_surv <- function(covars, agegp, event, survival_data, cuts_weeks_si
   
   ind_any_zeroeventperiod <- any((tbl_event_count$events_total == 0) & (!identical(cuts_weeks_since_expo, c(4, 49))))
   
+#  if (identical(cuts_weeks_since_expo, c(4, 49))){
+#    write.csv(tbl_event_count, paste0(res_dir,"/tbl_event_count_red_" , expo, "_", event, "_", ".csv"), row.names = T)
+#  } else (
+#    write.csv(tbl_event_count, paste0(res_dir,"/tbl_event_count_" , expo, "_", event, "_", ".csv"), row.names = T)
+#  )
+
   if (identical(cuts_weeks_since_expo, c(4, 49))){
-    write.csv(tbl_event_count, paste0("tbl_event_count_red_" , expo, "_", event, "_", agegp, ".csv"), row.names = T)
+    write.csv(tbl_event_count, paste0(res_dir,"/tbl_event_count_red_" , expo, "_", event, "_", agegp, ".csv"), row.names = T)
   } else (
-    write.csv(tbl_event_count, paste0("tbl_event_count_" , expo, "_", event, "_", agegp, ".csv"), row.names = T)
-  )
-  
+    write.csv(tbl_event_count, paste0(res_dir,"/tbl_event_count_" , expo, "_", event, "_", agegp, ".csv"), row.names = T)
+  )  
+   
   
   #===============================================================================
   # FINALIZE age, region, data_surv
