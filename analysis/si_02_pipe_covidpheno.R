@@ -5,7 +5,7 @@
 ## Author: Samantha Ip
 ## =============================================================================
 # specify events of interest
-ls_events <- c("AMI")
+#ls_events <- c("AMI")
 
 # specify path to data
 # 20210716 -- any covidpheno
@@ -14,8 +14,8 @@ ls_events <- c("AMI")
 master_df_fpath <- "output/input.csv" 
 
 # specify study parameters
-agebreaks <- c(0, 40, 60, 80, 500)
-agelabels <- c("<40", "40-59", "60-79", ">=80")
+#agebreaks <- c(0, 40, 60, 80, 500)
+#agelabels <- c("<40", "40-59", "60-79", ">=80")
 noncase_frac <- 0.1
 
 
