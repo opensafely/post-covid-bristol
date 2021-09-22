@@ -28,11 +28,11 @@ detectCores()
 
 
 # con <- dbConnect(odbc::odbc(), "Databricks", timeout=60, PWD=rstudioapi::askForPassword("enter databricks personal access token:"))
-rm(list=setdiff(ls(), c("con")))
+rm(list=setdiff(ls(), c("mdl","ls_events","agebreaks","agelabels" )))
 gc()
 
 # specify model 
-mdl <- "mdl2_agesex" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
+#mdl <- "mdl2_agesex" # "mdl1_unadj", "mdl2_agesex", "mdl3a_bkwdselect", "mdl3b_fullyadj", "mdl4_fullinteract_suppl34", "mdl5_anydiag_death28days", "mdl4_fullinteract_suppl34"
 # specify results directory -- I use res_dir
 res_dir_proj <- "output"
 # specify path to scripts' directory
