@@ -12,7 +12,7 @@
 library(data.table)
 library(dplyr)
 library(survival)
-library(table1)
+#library(table1)
 library(broom)
 library(DBI)
 library(ggplot2)
