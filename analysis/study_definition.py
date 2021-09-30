@@ -139,6 +139,32 @@ study = StudyDefinition(
     exp_confirmed_covid19_date=patients.minimum_of(
         "sgss_covid19_date","primary_care_covid19_date","hospital_covid19_date","death_covid19_date"
     ),
+    # First covid vaccination date (first vaccine given on 8/12/2020 in the UK)
+    covid19_vaccination_date1=patients.with_tpp_vaccination_record(
+        # code for TPP only, when using patients.with_tpp_vaccination_record() function
+        target_disease_matches="SARS-2 CORONAVIRUS",
+        on_or_after="2020-12-07",
+        find_first_match_in_period=True,
+        returning="date",
+        date_format="YYYY-MM-DD",
+        return_expectations={
+            "date": {"earliest": "2020-12-08", "latest": "today"},
+            "incidence": 0.7
+        },
+    ),
+    # Second covid vaccination date (first second dose reported on 29/12/2020 in the UK)
+    covid19_vaccination_date2=patients.with_tpp_vaccination_record(
+        # code for TPP only, when using patients.with_tpp_vaccination_record() function
+        target_disease_matches="SARS-2 CORONAVIRUS",
+        on_or_after="covid19_vaccination_date1 + 14 days",  # Allowing for less days between 2 vaccination dates
+        find_first_match_in_period=True,
+        returning="date",
+        date_format="YYYY-MM-DD",
+        return_expectations={
+            "date": {"earliest": "2020-12-29", "latest": "today"},
+            "incidence": 0.6
+        },
+    ),
     # Record acute myocardial infarction date
     ami_snomed=patients.with_these_clinical_events(
         ami_snomed_clinical,
