@@ -1,5 +1,5 @@
 ## =============================================================================
-## MODEL3B: FULLY ADJUSTED -- USING PRE-DEFINED OUTSOME-SPECIFIC FIXED COVARIATES 
+## MODEL3B: FULLY ADJUSTED -- USING PRE-DEFINED OUTCOME-SPECIFIC FIXED COVARIATES 
 ## and AMI BACKWARD-SELECTED COVARIATES
 ## (1) Prep outcome and analysis specific dataset
 ##
@@ -33,8 +33,8 @@ get_vacc_res <- function(sex_as_interaction, event, agegp, cohort_vac, covars){
   
   names(survival_data)[names(survival_data) == 'EXPO_DATE'] <- 'expo_date'
   
-  cat( "...... survival_data...... \n")
-  print(head(survival_data))
+  # cat( "...... survival_data...... \n")
+  # print(head(survival_data))
 
   res_vacc <- fit_model_reducedcovariates(sex_as_interaction, covars, agegp, event, survival_data)
   

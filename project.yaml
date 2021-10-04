@@ -10,3 +10,21 @@ actions:
     outputs:
       highly_sensitive:
         cohort: output/input.csv
+
+  mdl1_unadj:
+      run: r:latest analysis/vw_01_pipe.R mdl1_unadj AMI all
+      needs: [generate_study_population]
+      outputs:
+        moderately_sensitive:
+          tbl_event_count: output/tbl_event_count_mdl1_unadj_infection_AMI_all.csv
+          tbl_event_count_red: output/tbl_event_count_red_mdl1_unadj_infection_AMI_all.csv
+          tbl_hr: output/tbl_hr_mdl1_unadj_infection_AMI_all.csv
+
+  mdl3b_fullyadj:
+      run: r:latest analysis/vw_01_pipe.R mdl3b_fullyadj AMI all
+      needs: [generate_study_population]
+      outputs:
+        moderately_sensitive:
+          tbl_event_count: output/tbl_event_count_mdl3b_fullyadj_infection_AMI_all.csv
+          tbl_event_count_red: output/tbl_event_count_red_mdl3b_fullyadj_infection_AMI_all.csv
+          tbl_hr: output/tbl_hr_mdl3b_fullyadj_infection_AMI_all.csv

@@ -6,7 +6,7 @@
 source(file.path(scripts_dir,"si_fit_get_data_surv_eventcountbasedtimecuts.R"))
 
 
-library(multcomp)
+# library(multcomp)
 
 #------------------------ GET SURV FORMULA & COXPH() ---------------------------
 coxfit_bkwdselection <- function(data_surv, sex, interval_names, fixed_covars, event, agegp, sex_as_interaction, covar_names){
@@ -136,7 +136,7 @@ fit_model_reducedcovariates <- function(sex_as_interaction, covars,  agegp, even
   print(fit)
   
   
-  write.csv(fit, paste0("tbl_hr_" , expo, "_", event, "_", agegp, ".csv"), row.names = T)
+  write.csv(fit, paste0(res_dir_proj,"/tbl_hr_", mdl, "_", expo, "_", event, "_", agegp, ".csv"), row.names = T)
   
   
   gc()

@@ -15,8 +15,8 @@
 master_df_fpath <- "output/input.csv"
 
 # specify study parameters
-#agebreaks <- c(0, 40, 60, 80, 500)
-#agelabels <- c("under_40", "40-59", "60-79", "over_80")
+agebreaks <- c(0, 40, 60, 80, 500)
+agelabels <- c("under_40", "40-59", "60-79", "over_80")
 noncase_frac <- 0.1
 
 
@@ -27,9 +27,7 @@ cuts_weeks_since_expo <- c(1, 2, 4, 8, 12, 26, as.numeric(ceiling(difftime(cohor
 cuts_weeks_since_expo_reduced <- c(4, as.numeric(ceiling(difftime(cohort_end_date,cohort_start_date)/7))) 
 
 
-expo <- "INFECTION"
-
-
+expo <- "infection"
 
 # inspect column names of dataset
 master_names <- fread(master_df_fpath, nrows=1)
@@ -48,17 +46,12 @@ cohort_vac_cols <- c("patient_id",
 cohort_vac <- fread(master_df_fpath, 
                     select=cohort_vac_cols)
 
-setnames(cohort_vac, 
-         old = c("death_date",  
-                 "cov_sex", 
-                 "cov_age", 
-                 "exp_confirmed_covid19_date", 
-                 "cov_region"), 
-         new = c("DATE_OF_DEATH", 
-                 "SEX", 
-                 "AGE_AT_COHORT_START", 
-                 "EXPO_DATE", 
-                 "region_name"))
+cohort_vac <- dplyr::rename(cohort_vac,
+                            DATE_OF_DEATH = death_date,
+                            SEX = cov_sex,
+                            AGE_AT_COHORT_START = cov_age, 
+                            EXPO_DATE = exp_confirmed_covid19_date, 
+                            region_name = cov_region)
 
 cohort_vac$DATE_OF_DEATH=na_if(cohort_vac$DATE_OF_DEATH,"")
 cohort_vac$DATE_OF_DEATH=as.Date(cohort_vac$DATE_OF_DEATH)
