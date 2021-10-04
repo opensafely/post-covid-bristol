@@ -47,6 +47,366 @@
       "url": "https://codelists.opensafely.org/codelist/opensafely/smoking-clear/2020-04-29/",
       "downloaded_at": "2021-08-06 14:10:08.019002Z",
       "sha": "0b5f3afe1db96dcce5141220e893a42ba2e5a8f7"
+    },
+    "user-elsie_horne-ami_snomed.csv": {
+      "id": "user/elsie_horne/ami_snomed/36d11028",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/ami_snomed/36d11028/",
+      "downloaded_at": "2021-09-02 10:04:07.258807Z",
+      "sha": "37aef412e1075e06cb5da738e5ba31fc214e432d"
+    },
+    "user-elsie_horne-ami_icd10.csv": {
+      "id": "user/elsie_horne/ami_icd10/4f19cfce",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/ami_icd10/4f19cfce/",
+      "downloaded_at": "2021-09-02 10:04:07.588756Z",
+      "sha": "5fd6ebf61d48171a314fdd0d43868eadd7937dd5"
+    },
+    "user-elsie_horne-ami_prior_icd10.csv": {
+      "id": "user/elsie_horne/ami_prior_icd10/360a5c99",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/ami_prior_icd10/360a5c99/",
+      "downloaded_at": "2021-09-02 10:04:07.885801Z",
+      "sha": "7ca20f7f5d9db9133b839a1c4edb297c64046997"
+    },
+    "user-elsie_horne-artery_dissect_icd10.csv": {
+      "id": "user/elsie_horne/artery_dissect_icd10/20745ce9",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/artery_dissect_icd10/20745ce9/",
+      "downloaded_at": "2021-09-02 10:04:08.147825Z",
+      "sha": "5f2d94cac3c4f49311acd9689acdca7686158d62"
+    },
+    "user-elsie_horne-bmi_obesity_snomed.csv": {
+      "id": "user/elsie_horne/bmi_obesity_snomed/0764e9b4",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/bmi_obesity_snomed/0764e9b4/",
+      "downloaded_at": "2021-09-02 10:04:08.433672Z",
+      "sha": "18926afcb4bc165e7709a17c89735b2c03b81005"
+    },
+    "user-elsie_horne-bmi_obesity_icd10.csv": {
+      "id": "user/elsie_horne/bmi_obesity_icd10/6e55767e",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/bmi_obesity_icd10/6e55767e/",
+      "downloaded_at": "2021-09-02 10:04:08.739131Z",
+      "sha": "9235bab1c2f3b5581dd34431839db55f3d3bdb59"
+    },
+    "user-elsie_horne-cancer_snomed.csv": {
+      "id": "user/elsie_horne/cancer_snomed/23271cdf",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/cancer_snomed/23271cdf/",
+      "downloaded_at": "2021-09-02 10:04:09.449357Z",
+      "sha": "d058582fe371bdf49fb60a829e255163c57bcaba"
+    },
+    "user-elsie_horne-cancer_icd10.csv": {
+      "id": "user/elsie_horne/cancer_icd10/55460349",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/cancer_icd10/55460349/",
+      "downloaded_at": "2021-09-02 10:04:09.917376Z",
+      "sha": "e7d60dcd0d942c6db6095390c5befcf623cb4b36"
+    },
+    "user-elsie_horne-cardiomyopathy_snomed.csv": {
+      "id": "user/elsie_horne/cardiomyopathy_snomed/0a17a9aa",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/cardiomyopathy_snomed/0a17a9aa/",
+      "downloaded_at": "2021-09-02 10:04:10.207615Z",
+      "sha": "74fa1939c8b02d7c24c84b0a300d937fb9de15f5"
+    },
+    "user-elsie_horne-cardiomyopathy_icd10.csv": {
+      "id": "user/elsie_horne/cardiomyopathy_icd10/71083674",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/cardiomyopathy_icd10/71083674/",
+      "downloaded_at": "2021-09-02 10:04:10.507801Z",
+      "sha": "45fd93b9141960b08bf89ff797c6d7909039a59e"
+    },
+    "user-elsie_horne-ckd_snomed.csv": {
+      "id": "user/elsie_horne/ckd_snomed/25d9dcd5",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/ckd_snomed/25d9dcd5/",
+      "downloaded_at": "2021-09-02 10:04:10.804893Z",
+      "sha": "bff2f324ff0a1569ce7709903fd6a67b6ee5334d"
+    },
+    "user-elsie_horne-ckd_icd10.csv": {
+      "id": "user/elsie_horne/ckd_icd10/0cca69a0",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/ckd_icd10/0cca69a0/",
+      "downloaded_at": "2021-09-02 10:04:11.106309Z",
+      "sha": "f31feab84ee380583be736e0122aae653af0ba30"
+    },
+    "user-elsie_horne-copd_snomed.csv": {
+      "id": "user/elsie_horne/copd_snomed/419c1000",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/copd_snomed/419c1000/",
+      "downloaded_at": "2021-09-02 10:04:11.444947Z",
+      "sha": "8621c69b3c52fd62b4ed4811411037eb9a2c9bb1"
+    },
+    "user-elsie_horne-copd_icd10.csv": {
+      "id": "user/elsie_horne/copd_icd10/5aab8335",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/copd_icd10/5aab8335/",
+      "downloaded_at": "2021-09-02 10:04:11.713349Z",
+      "sha": "06a1624b3719e3185010fa65aa7322d9176f914c"
+    },
+    "user-elsie_horne-dementia_snomed.csv": {
+      "id": "user/elsie_horne/dementia_snomed/7bd3364c",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/dementia_snomed/7bd3364c/",
+      "downloaded_at": "2021-09-02 10:04:12.026713Z",
+      "sha": "aaf3c972001fc48fa32a2030e4996d4ce7ca5012"
+    },
+    "user-elsie_horne-dementia_icd10.csv": {
+      "id": "user/elsie_horne/dementia_icd10/2df21cb7",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/dementia_icd10/2df21cb7/",
+      "downloaded_at": "2021-09-02 10:04:12.318664Z",
+      "sha": "d22eb43caf43b93fc2e9a431fc3f3b91d9e73c3c"
+    },
+    "user-elsie_horne-dic_icd10.csv": {
+      "id": "user/elsie_horne/dic_icd10/62c3c317",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/dic_icd10/62c3c317/",
+      "downloaded_at": "2021-09-02 10:04:12.599549Z",
+      "sha": "010af58448cb4b0b164c4a4869b23456466b888b"
+    },
+    "user-elsie_horne-dvt_dvt_icd10.csv": {
+      "id": "user/elsie_horne/dvt_dvt_icd10/49b44fe2",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/dvt_dvt_icd10/49b44fe2/",
+      "downloaded_at": "2021-09-02 10:04:12.888193Z",
+      "sha": "b2a77d4b4ca24f229a028679573b6a0eb0aebf1a"
+    },
+    "user-elsie_horne-dvt_icvt_icd10.csv": {
+      "id": "user/elsie_horne/dvt_icvt_icd10/30a4dcad",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/dvt_icvt_icd10/30a4dcad/",
+      "downloaded_at": "2021-09-02 10:04:13.168103Z",
+      "sha": "5c1f4d677b9411b6b52d5da8d9c234baf45d0d02"
+    },
+    "user-elsie_horne-dvt_icvt_snomed.csv": {
+      "id": "user/elsie_horne/dvt_icvt_snomed/7e85f642",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/dvt_icvt_snomed/7e85f642/",
+      "downloaded_at": "2021-09-02 10:04:13.468218Z",
+      "sha": "d5ad89193e307a0d8170cefa769a1253ab774e70"
+    },
+    "user-elsie_horne-dvt_pregnancy_icd10.csv": {
+      "id": "user/elsie_horne/dvt_pregnancy_icd10/6576830d",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/dvt_pregnancy_icd10/6576830d/",
+      "downloaded_at": "2021-09-02 10:04:13.769137Z",
+      "sha": "9d329a04c29cb4bbe16e7685c8e8b223e3d1eef1"
+    },
+    "user-elsie_horne-hf_snomed.csv": {
+      "id": "user/elsie_horne/hf_snomed/33579ca3",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/hf_snomed/33579ca3/",
+      "downloaded_at": "2021-09-02 10:04:14.088188Z",
+      "sha": "1ec565133002e86008e9f7b77dc3582bf2a9eb6f"
+    },
+    "user-elsie_horne-hf_icd10.csv": {
+      "id": "user/elsie_horne/hf_icd10/4c670fd8",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/hf_icd10/4c670fd8/",
+      "downloaded_at": "2021-09-02 10:04:14.391825Z",
+      "sha": "f4a2c2d30208c0ecf31283863e395e40d149655a"
+    },
+    "user-elsie_horne-stroke_isch_icd10.csv": {
+      "id": "user/elsie_horne/stroke_isch_icd10/03eb762f",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/stroke_isch_icd10/03eb762f/",
+      "downloaded_at": "2021-09-02 10:04:14.684794Z",
+      "sha": "8977a6317fd598d8d4c2c56b80ef98c9b7efa435"
+    },
+    "user-elsie_horne-stroke_isch_snomed.csv": {
+      "id": "user/elsie_horne/stroke_isch_snomed/1cfae964",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/stroke_isch_snomed/1cfae964/",
+      "downloaded_at": "2021-09-02 10:04:15.004202Z",
+      "sha": "76b915a793f91c4675796295f217e74e2f467bae"
+    },
+    "user-elsie_horne-stroke_sah_hs_icd10.csv": {
+      "id": "user/elsie_horne/stroke_sah_hs_icd10/51cc8fc4",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/stroke_sah_hs_icd10/51cc8fc4/",
+      "downloaded_at": "2021-09-02 10:04:15.281424Z",
+      "sha": "f3dcf50bbaf741e329c3745909dd3a11f28942ae"
+    },
+    "user-elsie_horne-stroke_sah_hs_snomed.csv": {
+      "id": "user/elsie_horne/stroke_sah_hs_snomed/6adc02f9",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/stroke_sah_hs_snomed/6adc02f9/",
+      "downloaded_at": "2021-09-02 10:04:15.584145Z",
+      "sha": "581ddc923d2711c3c48251f88cd0c40bced047c8"
+    },
+    "user-elsie_horne-pe_icd10.csv": {
+      "id": "user/elsie_horne/pe_icd10/069e3625",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/pe_icd10/069e3625/",
+      "downloaded_at": "2021-09-02 10:04:15.877948Z",
+      "sha": "c6a53a19392acc3fff1a685c963c86837dead271"
+    },
+    "user-elsie_horne-pe_snomed.csv": {
+      "id": "user/elsie_horne/pe_snomed/6d8ec2ef",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/pe_snomed/6d8ec2ef/",
+      "downloaded_at": "2021-09-02 10:04:16.179538Z",
+      "sha": "bb1ca6e3f59d4a136fba0bdfd6c9760a317b9434"
+    },
+    "user-elsie_horne-other_dvt_icd10.csv": {
+      "id": "user/elsie_horne/other_dvt_icd10/547f4fba",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/other_dvt_icd10/547f4fba/",
+      "downloaded_at": "2021-09-02 10:04:16.447557Z",
+      "sha": "c3d8dbfd49282af699396b8996c9d46d74e8723d"
+    },
+    "user-elsie_horne-icvt_pregnancy_icd10.csv": {
+      "id": "user/elsie_horne/icvt_pregnancy_icd10/3b6fdc85",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/icvt_pregnancy_icd10/3b6fdc85/",
+      "downloaded_at": "2021-09-02 10:04:16.733075Z",
+      "sha": "5549985dd9f06c465df3a32f935a60d5578c1835"
+    },
+    "user-elsie_horne-portal_vein_thrombosis_icd10.csv": {
+      "id": "user/elsie_horne/portal_vein_thrombosis_icd10/22606950",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/portal_vein_thrombosis_icd10/22606950/",
+      "downloaded_at": "2021-09-02 10:04:17.032613Z",
+      "sha": "68ab66c54a622d81330d8cb718422fa4554e1560"
+    },
+    "user-elsie_horne-vt_icd10.csv": {
+      "id": "user/elsie_horne/vt_icd10/0950f61b",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/vt_icd10/0950f61b/",
+      "downloaded_at": "2021-09-02 10:04:17.335029Z",
+      "sha": "9f8edfcb2e2c0eeafea761dbf071358ebbf31bce"
+    },
+    "user-elsie_horne-thrombophilia_icd10.csv": {
+      "id": "user/elsie_horne/thrombophilia_icd10/704182e5",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/thrombophilia_icd10/704182e5/",
+      "downloaded_at": "2021-09-02 10:04:17.614475Z",
+      "sha": "bd217067076941d2de8ee81b24c7d7270fbe4841"
+    },
+    "user-elsie_horne-thrombophilia_snomed.csv": {
+      "id": "user/elsie_horne/thrombophilia_snomed/57320fb0",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/thrombophilia_snomed/57320fb0/",
+      "downloaded_at": "2021-09-02 10:04:17.928957Z",
+      "sha": "72665e58c256c9d565fa2f7def91e2362f2bbf18"
+    },
+    "user-elsie_horne-tcp_snomed.csv": {
+      "id": "user/elsie_horne/tcp_snomed/3e229c7b",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/tcp_snomed/3e229c7b/",
+      "downloaded_at": "2021-09-02 10:04:18.242750Z",
+      "sha": "20451a560269df580baf4f72033235b6ac6bda46"
+    },
+    "user-elsie_horne-ttp_icd10.csv": {
+      "id": "user/elsie_horne/ttp_icd10/25132946",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/ttp_icd10/25132946/",
+      "downloaded_at": "2021-09-02 10:04:18.545687Z",
+      "sha": "032501f13c30905ed8695c6df86e0beef087f2ba"
+    },
+    "user-elsie_horne-thrombocytopenia_icd10.csv": {
+      "id": "user/elsie_horne/thrombocytopenia_icd10/0c03b611",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/thrombocytopenia_icd10/0c03b611/",
+      "downloaded_at": "2021-09-02 10:04:18.845985Z",
+      "sha": "f466f12e3c7841603b9a9cf6eb5b24e794263c21"
+    },
+    "user-elsie_horne-dementia_vascular_icd10.csv": {
+      "id": "user/elsie_horne/dementia_vascular_icd10/27c5e93c",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/dementia_vascular_icd10/27c5e93c/",
+      "downloaded_at": "2021-09-02 10:04:19.139650Z",
+      "sha": "af55dec671d26621f1a8c01c9b002b096eed27ce"
+    },
+    "user-elsie_horne-dementia_vascular_snomed.csv": {
+      "id": "user/elsie_horne/dementia_vascular_snomed/0eb67607",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/dementia_vascular_snomed/0eb67607/",
+      "downloaded_at": "2021-09-02 10:04:19.444536Z",
+      "sha": "47a67ea3a18239dbdff6c0f514ea81fe6d2d1bec"
+    },
+    "user-elsie_horne-liver_disease_icd10.csv": {
+      "id": "user/elsie_horne/liver_disease_icd10/75a702d1",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/liver_disease_icd10/75a702d1/",
+      "downloaded_at": "2021-09-02 10:04:19.770064Z",
+      "sha": "0ad936ee6779893439a3e1fa042cdeeead7504ca"
+    },
+    "user-elsie_horne-liver_disease_snomed.csv": {
+      "id": "user/elsie_horne/liver_disease_snomed/5c978f9c",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/liver_disease_snomed/5c978f9c/",
+      "downloaded_at": "2021-09-02 10:04:20.116539Z",
+      "sha": "1126b645b1e22440f513a66cc2cf91a20d7177ad"
+    },
+    "user-elsie_horne-diabetes_snomed.csv": {
+      "id": "user/elsie_horne/diabetes_snomed/43881c67",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/diabetes_snomed/43881c67/",
+      "downloaded_at": "2021-09-02 10:04:20.471975Z",
+      "sha": "c8e93a29e7f02dbbf006c009cbc57709068fb096"
+    },
+    "user-elsie_horne-diabetes_icd10.csv": {
+      "id": "user/elsie_horne/diabetes_icd10/2a78a932",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/diabetes_icd10/2a78a932/",
+      "downloaded_at": "2021-09-02 10:04:20.781434Z",
+      "sha": "f620a8f7c8c98290527cd089053556963e3d18c0"
+    },
+    "user-elsie_horne-diabetes_drugs_dmd.csv": {
+      "id": "user/elsie_horne/diabetes_drugs_dmd/3228dace",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/diabetes_drugs_dmd/3228dace/",
+      "downloaded_at": "2021-09-02 10:04:21.072576Z",
+      "sha": "77ae9149dbd431c7905ef10b1ad311e7aec8e1f9"
+    },
+    "user-elsie_horne-depression_icd10.csv": {
+      "id": "user/elsie_horne/depression_icd10/116935fd",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/depression_icd10/116935fd/",
+      "downloaded_at": "2021-09-02 10:04:21.356445Z",
+      "sha": "3453d912aa7f2d43a3b58a388c54204eea44daa2"
+    },
+    "user-elsie_horne-depression_snomed.csv": {
+      "id": "user/elsie_horne/depression_snomed/7859c2c7",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/depression_snomed/7859c2c7/",
+      "downloaded_at": "2021-09-02 10:04:21.655150Z",
+      "sha": "7715294e5c7b5d11f10fd359679abd79d351257f"
+    },
+    "user-elsie_horne-antiplatelet_dmd.csv": {
+      "id": "user/elsie_horne/antiplatelet_dmd/61950142",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/antiplatelet_dmd/61950142/",
+      "downloaded_at": "2021-09-02 10:04:21.950167Z",
+      "sha": "75fcb2cdcc0c05e0d6b3fbfbee4cd101058b67f0"
+    },
+    "user-elsie_horne-lipid_lowering_dmd.csv": {
+      "id": "user/elsie_horne/lipid_lowering_dmd/66fa812e",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/lipid_lowering_dmd/66fa812e/",
+      "downloaded_at": "2021-09-02 10:04:22.259255Z",
+      "sha": "da2bb21052af9520f52d9d7c9edcf2198aec0cc9"
+    },
+    "user-elsie_horne-anticoagulant_dmd.csv": {
+      "id": "user/elsie_horne/anticoagulant_dmd/7aa47477",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/anticoagulant_dmd/7aa47477/",
+      "downloaded_at": "2021-09-02 10:04:22.527102Z",
+      "sha": "b0ab6e34262fcd2fee99d25068b25e140603e9e8"
+    },
+    "user-elsie_horne-cocp_dmd.csv": {
+      "id": "user/elsie_horne/cocp_dmd/1666a7a3",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/cocp_dmd/1666a7a3/",
+      "downloaded_at": "2021-09-02 10:04:22.836441Z",
+      "sha": "8327c8ec4d2a3f1fcec7ffaa76a3e79cc1e5974a"
+    },
+    "user-elsie_horne-hrt_dmd.csv": {
+      "id": "user/elsie_horne/hrt_dmd/19196799",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/hrt_dmd/19196799/",
+      "downloaded_at": "2021-09-02 10:04:23.170118Z",
+      "sha": "14aff592668a703f02cc68aa54c7ebab0774c62f"
+    },
+    "user-elsie_horne-other_arterial_embolism_icd10.csv": {
+      "id": "user/elsie_horne/other_arterial_embolism_icd10/463adc5d",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/other_arterial_embolism_icd10/463adc5d/",
+      "downloaded_at": "2021-09-02 10:04:23.467580Z",
+      "sha": "1400d26dcbdabfd0920bc61da9e39a66e111e19d"
+    },
+    "user-elsie_horne-mesenteric_thrombus_icd10.csv": {
+      "id": "user/elsie_horne/mesenteric_thrombus_icd10/2d2b6928",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/mesenteric_thrombus_icd10/2d2b6928/",
+      "downloaded_at": "2021-09-02 10:04:23.787280Z",
+      "sha": "af0479a58e905ecf94a857cc545017fbde53aa78"
+    },
+    "user-elsie_horne-life_arrhythmia_icd10.csv": {
+      "id": "user/elsie_horne/life_arrhythmia_icd10/141bf5f3",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/life_arrhythmia_icd10/141bf5f3/",
+      "downloaded_at": "2021-09-02 10:04:24.089061Z",
+      "sha": "84ba3ad5b996a982a336db6e547f49377c4ecdf7"
+    },
+    "user-elsie_horne-pericarditis_icd10.csv": {
+      "id": "user/elsie_horne/pericarditis_icd10/7b0c82bd",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/pericarditis_icd10/7b0c82bd/",
+      "downloaded_at": "2021-09-02 10:04:24.371741Z",
+      "sha": "7e4572711cf37d0f47e107410a61fe2bd1cb8fb9"
+    },
+    "user-elsie_horne-myocarditis_icd10.csv": {
+      "id": "user/elsie_horne/myocarditis_icd10/48ed9c53",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/myocarditis_icd10/48ed9c53/",
+      "downloaded_at": "2021-09-02 10:04:24.684277Z",
+      "sha": "e1d9022f6d84f4ce7cacb0c0efbe3a890c752c7a"
+    },
+    "user-elsie_horne-hypertension_icd10.csv": {
+      "id": "user/elsie_horne/hypertension_icd10/1a48296e",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/hypertension_icd10/1a48296e/",
+      "downloaded_at": "2021-09-02 10:04:25.013274Z",
+      "sha": "196b2688d715a5265757642853d94f824741f783"
+    },
+    "user-elsie_horne-hypertension_drugs_dmd.csv": {
+      "id": "user/elsie_horne/hypertension_drugs_dmd/0009f464",
+      "url": "https://codelists.opensafely.org/codelist/user/elsie_horne/hypertension_drugs_dmd/0009f464/",
+      "downloaded_at": "2021-09-02 10:04:25.366222Z",
+      "sha": "09641b467bfb30b5d37852a65002a74d3d8a2217"
+    },
+    "nhsd-primary-care-domain-refsets-hyp_cod.csv": {
+      "id": "nhsd-primary-care-domain-refsets/hyp_cod/20210127",
+      "url": "https://codelists.opensafely.org/codelist/nhsd-primary-care-domain-refsets/hyp_cod/20210127/",
+      "downloaded_at": "2021-09-02 10:04:25.685630Z",
+      "sha": "2c1fb493d94ce1610482d575ef14c35bd09e47c1"
     }
   }
 }

@@ -11,6 +11,13 @@ actions:
       highly_sensitive:
         cohort: output/input.csv
 
+  covariate_check_ages_40_60_80:
+    run: r:latest analysis/covariate_check.R 40_60_80
+    needs: [generate_study_population]
+    outputs:
+      moderately_sensitive:
+        covariate_check_ages: output/covariate_check_ages_40_60_80.csv
+
   mdl1_unadj:
       run: r:latest analysis/vw_01_pipe.R mdl1_unadj AMI all
       needs: [generate_study_population]
