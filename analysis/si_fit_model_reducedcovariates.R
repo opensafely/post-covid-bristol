@@ -8,13 +8,33 @@ source(file.path(scripts_dir,"si_fit_get_data_surv_eventcountbasedtimecuts.R"))
 
 # library(multcomp)
 
+rm_lowvar_covars <- function(data_surv){
+  df <- data_surv %>% dplyr::select(c( "expo", "event", "region_name",covar_names)) %>% distinct() %>% filter((expo==1) & (event==1))
+  df <- df %>%  dplyr::select(!c("expo", "event", 
+                                 df %>%  dplyr::select_if(is.numeric) %>% names(),
+                                 df %>%  dplyr::select_if(~n_distinct(.)>2) %>% names()
+  ))
+  summary <- as.data.frame(summary(df))
+  summary$Freq <- gsub("0:","",summary$Freq)
+  summary$Freq <- gsub("1:","",summary$Freq)
+  summary$Freq <- as.numeric(summary$Freq)
+  return(as.character(summary$Var2[summary$Freq <=2]))
+}
+
 #------------------------ GET SURV FORMULA & COXPH() ---------------------------
 coxfit_bkwdselection <- function(data_surv, sex, interval_names, fixed_covars, event, agegp, sex_as_interaction, covar_names){
   cat("...... sex ", sex, " ...... \n")
   # which covariates are backward-selected -- to include? ----
   # AMI_bkwdselected_covars <- readRDS(file=paste0("backwards_names_kept_vac_all_AMI_", agegp, "_sex", sex,".rds"))
-  AMI_bkwdselected_covars <- covar_names
+  
+  if(mdl == "mdl3b_fullyadj"){
+    covars_to_remove <- rm_lowvar_covars(data_surv)[!is.na((rm_lowvar_covars(data_surv)))]
+    data_surv <- data_surv %>% dplyr::select(!covars_to_remove)
+  }
+  
+  AMI_bkwdselected_covars <- covar_names[covar_names %in% names(data_surv)] %>% sort()
   interval_names_withpre <- c("week_pre", interval_names)
+  
   
   # get Surv formula ----
   if (sex_as_interaction){
