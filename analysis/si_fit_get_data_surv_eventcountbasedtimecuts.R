@@ -252,7 +252,7 @@ fit_get_data_surv <- function(covars, agegp, event, survival_data, cuts_weeks_si
 #  )
 
   if (identical(cuts_weeks_since_expo, c(4, 49))){
-    write.csv(tbl_event_count, paste0(res_dir,"/tbl_event_count_red_", mdl, "_", expo, "_", event, "_", agegp, ".csv"), row.names = T)
+    write.csv(tbl_event_count, paste0(res_dir,"/tbl_event_count_", mdl, "_", expo, "_", event, "_", agegp, ".csv"), row.names = T)
   } else (
     write.csv(tbl_event_count, paste0(res_dir,"/tbl_event_count_", mdl, "_", expo, "_", event, "_", agegp, ".csv"), row.names = T)
   )  
