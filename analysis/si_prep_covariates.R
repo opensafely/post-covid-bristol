@@ -72,7 +72,7 @@ colnames(covars)[colSums(is.na(covars)) > 0]
 ##---------------------------- RELEVEL -----------------------------------------
 # The few factors that have specific  non-alphabetical reference levels
 covars$cov_ethnicity <- relevel(covars$cov_ethnicity, ref = 1) #"White")
-covars$cov_smoking_status <- relevel(covars$cov_smoking_status, ref = "")
+covars$cov_smoking_status <- relevel(covars$cov_smoking_status, ref = "M")
 cohort_vac$region_name <- relevel(factor(cohort_vac$region_name), ref = "London")
 
 
