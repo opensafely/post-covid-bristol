@@ -21,7 +21,12 @@ noncase_frac <- 0.1
 
 
 cohort_start_date <- as.Date("2020-01-01")
-cohort_end_date <- as.Date("2020-12-07")
+# For vaccination censoring analysis: Changed cohort_end_date to latest data extraction date
+#cohort_end_date <- as.Date("2020-12-07")
+cohort_end_date <- as.Date("2021-10-13")
+
+# Date format for date of expo, death and vaccination
+date_format = "%d/%m/%Y"
 
 cuts_weeks_since_expo <- c(1, 2, 4, 8, 12, 26, as.numeric(ceiling(difftime(cohort_end_date,cohort_start_date)/7))) 
 cuts_weeks_since_expo_reduced <- c(4, as.numeric(ceiling(difftime(cohort_end_date,cohort_start_date)/7))) 
@@ -40,7 +45,8 @@ cohort_vac_cols <- c("patient_id",
                      "cov_sex", 
                      "death_date", 
                      "cov_age", 
-                     "exp_confirmed_covid19_date", 
+                     "exp_confirmed_covid19_date",
+                     "covid19_vaccination_date1",
                      "cov_region")
 
 cohort_vac <- fread(master_df_fpath, 
@@ -50,13 +56,16 @@ cohort_vac <- dplyr::rename(cohort_vac,
                             DATE_OF_DEATH = death_date,
                             SEX = cov_sex,
                             AGE_AT_COHORT_START = cov_age, 
-                            EXPO_DATE = exp_confirmed_covid19_date, 
+                            EXPO_DATE = exp_confirmed_covid19_date,
+                            DATE_OF_VACCINATION1 = covid19_vaccination_date1,
                             region_name = cov_region)
 
 cohort_vac$DATE_OF_DEATH=na_if(cohort_vac$DATE_OF_DEATH,"")
-cohort_vac$DATE_OF_DEATH=as.Date(cohort_vac$DATE_OF_DEATH)
+cohort_vac$DATE_OF_DEATH=as.Date(cohort_vac$DATE_OF_DEATH,date_format)
 cohort_vac$EXPO_DATE=na_if(cohort_vac$EXPO_DATE,"")
-cohort_vac$EXPO_DATE=as.Date(cohort_vac$EXPO_DATE)
+cohort_vac$EXPO_DATE=as.Date(cohort_vac$EXPO_DATE,date_format)
+cohort_vac$DATE_OF_VACCINATION1=na_if(cohort_vac$DATE_OF_VACCINATION1,"")
+cohort_vac$DATE_OF_VACCINATION1=as.Date(cohort_vac$DATE_OF_VACCINATION1,date_format)
 
 
 print(head(cohort_vac))

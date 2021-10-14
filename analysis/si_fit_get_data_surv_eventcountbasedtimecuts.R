@@ -55,7 +55,7 @@ fit_get_data_surv <- function(covars, agegp, event, survival_data, cuts_weeks_si
     cohort_agegp <- rbind(cases, non_cases_exposed, non_cases_unexposed)
   }
   
-  system.time(cohort_agegp <-  transform(cohort_agegp, end_date = pmin(event_date, DATE_OF_DEATH, cohort_end_date, na.rm=TRUE)))
+  system.time(cohort_agegp <- transform(cohort_agegp, end_date = pmin(event_date, DATE_OF_VACCINATION1, DATE_OF_DEATH, cohort_end_date, na.rm=TRUE)))
   cat(paste0("any missing end_dates? ", any(is.na(cohort_agegp$end_date)), "\n"))
 
   cohort_agegp$days_to_end <- as.numeric(cohort_agegp$end_date-cohort_start_date)
@@ -68,7 +68,13 @@ fit_get_data_surv <- function(covars, agegp, event, survival_data, cuts_weeks_si
   
   noncase_ids <- unique(non_cases_unexposed$patient_id)
   print("cohort_agegp done")
-  head(cohort_agegp )
+  #head(cohort_agegp)
+  print(head(cohort_agegp))
+  print("Summary of vaccination date")
+  print(summary(cohort_agegp$DATE_OF_VACCINATION1))
+  print("Summary of death date")
+  print(summary(cohort_agegp$DATE_OF_DEATH))
+
   #===============================================================================
   #   CACHE some features
   #-------------------------------------------------------------------------------  
